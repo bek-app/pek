@@ -1,0 +1,75 @@
+<div class="source-header" fxLayout="row" fxLayoutAlign="space-between end">
+  <button mat-raised-button color="primary" (click)="openAreaDialog()">
+    <mat-icon class="mat-18">add</mat-icon>{{ "CREATE" | translate }}
+  </button>
+
+  <h2>{{ "SOURCE_EMISSIONS.AREA_NAME.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="area-name"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onSelectedRowsChanged)="
+      onSelectedRowsChanged(
+        $any($event).detail.eventData,
+        $any($event).detail.args
+      )
+    "
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
+
+<nav mat-tab-nav-bar>
+  <a
+    mat-tab-link
+    *ngFor="let link of tabLinks"
+    [routerLink]="link.link"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ link.label }}
+  </a>
+</nav>
+
+<router-outlet></router-outlet>
+
+<ng-template #areaNameContent>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="dialog__title">
+      <h2 matDialogTitle>Добавить новый площадка</h2>
+      <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+    </div>
+    <mat-dialog-content>
+      <mat-form-field>
+        <mat-label>
+          {{ "SOURCE_EMISSIONS.AREA_NAME.FORM.AREA_NAME" | translate }}
+        </mat-label>
+
+        <input matInput formControlName="areaName" type="text" />
+        <mat-error> {{ "ERROR" | translate }}</mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      *ngIf="!viewMode"
+    >
+      <button type="button" mat-raised-button color="warn" matDialogClose>
+        {{ "CANCEL" | translate }}
+      </button>
+
+      <button type="submit" mat-raised-button color="primary">
+        {{ "SAVE" | translate }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-template>

@@ -18,8 +18,6 @@ import { DicKatoService } from '@services/dictionary/dic-kato.service';
 import { ObjectsService } from '@services/objects/objects.service';
 import { Subscription } from 'rxjs';
 
-const trackByIdentity = (index: number, item: any) => item;
-
 @Component({
   selector: 'app-object-form',
   templateUrl: './object-form.component.html',

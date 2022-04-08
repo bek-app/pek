@@ -1,1 +1,14 @@
-<p>objects works!</p>
+<br />
+<nav mat-tab-nav-bar backgroundColor="primary">
+  <a
+    mat-tab-link
+    *ngFor="let objRoute of objectsRoute"
+    [routerLink]="objRoute.src"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ objRoute.name }}
+  </a>
+</nav>
+<router-outlet></router-outlet>

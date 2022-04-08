@@ -26,7 +26,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+} from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -71,6 +74,7 @@ const materialModules = [
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: appearance,
     },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
   ],
 })
 export class AngularMaterialModule {}
