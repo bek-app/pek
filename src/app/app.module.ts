@@ -16,6 +16,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ObjectFormComponent } from './components/object-list/object-form/object-form.component';
 import { SlickGridModule } from './shared/slickgrid/slickgrid.module';
+import { SourceEmissionsComponent } from './components/objects/source-emissions/source-emissions.component';
+import { GasMonitoringComponent } from './components/objects/gas-monitoring/gas-monitoring.component';
+import { WasteWaterComponent } from './components/objects/waste-water/waste-water.component';
+import { WastePlaceComponent } from './components/objects/waste-place/waste-place.component';
+import { BurialPlaceComponent } from './components/objects/burial-place/burial-place.component';
+import { InstrumentalMeasurementComponent } from './components/objects/source-emissions/instrumental-measurement/instrumental-measurement.component';
+import { CalculationMethodComponent } from './components/objects/source-emissions/calculation-method/calculation-method.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,13 @@ import { SlickGridModule } from './shared/slickgrid/slickgrid.module';
     ObjectListComponent,
     CommonComponent,
     ObjectFormComponent,
+    SourceEmissionsComponent,
+    GasMonitoringComponent,
+    WasteWaterComponent,
+    WastePlaceComponent,
+    BurialPlaceComponent,
+    InstrumentalMeasurementComponent,
+    CalculationMethodComponent,
   ],
   imports: [
     BrowserModule,
