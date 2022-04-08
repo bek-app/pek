@@ -14,6 +14,8 @@ import { ObjectListComponent } from './components/object-list/object-list.compon
 import { CommonComponent } from './layouts/common/common.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ObjectFormComponent } from './components/object-list/object-form/object-form.component';
+import { SlickGridModule } from './shared/slickgrid/slickgrid.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReportListComponent,
     ObjectListComponent,
     CommonComponent,
+    ObjectFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularMaterialModule,
     FlexLayoutModule,
     CustomTranslateModule,
+    SlickGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

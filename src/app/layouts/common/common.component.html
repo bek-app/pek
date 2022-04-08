@@ -1,1 +1,96 @@
-<p>common works!</p>
+<mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar-row>
+    <a mat-button routerLink="/common/home" class="nav-link">
+      <h1>PEK</h1>
+    </a>
+    <a mat-button [matMenuTriggerFor]="menuAdministration">
+      Администрирование
+    </a>
+
+    <mat-menu #menuAdministration="matMenu">
+      <a
+        mat-menu-item
+        routerLink="/common/administration/users"
+        class="nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+      >
+        <mat-icon>people</mat-icon> Пользователи
+      </a>
+      <a
+        mat-menu-item
+        routerLink="/common/administration/verificator"
+        class="nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+      >
+        <mat-icon class="mat-18">how_to_reg</mat-icon> Верификаторы
+      </a>
+
+      <a
+        mat-menu-item
+        routerLink="/common/administration/declarant-list"
+        class="nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+      >
+        <mat-icon class="mat-18">people_outline</mat-icon> Заявителей
+      </a>
+    </mat-menu>
+
+    <a
+      mat-button
+      routerLink="/common/object-list"
+      class="nav-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+    >
+      Обьекты
+    </a>
+
+    <a
+      mat-button
+      routerLink="/common/report-list"
+      class="nav-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+    >
+      Отчеты
+    </a>
+
+    <a
+      mat-button
+      routerLink="/common/cadaster-report-check"
+      class="nav-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+    >
+      Проверка
+    </a>
+
+    <span class="navbar-spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>person</mat-icon>
+    </button>
+
+    <mat-menu
+      #userMenu="matMenu"
+      xPosition="before"
+      yPosition="above"
+      [overlapTrigger]="false"
+    >
+      <a mat-menu-item [routerLink]="['/common/administration/profile']">
+        <mat-icon>person</mat-icon>
+        <span>Профайл</span>
+      </a>
+
+      <a mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Выйти</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
