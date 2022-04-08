@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~@angular/material/theming";
+//   @import "~@ng-matero/extensions/theming";
+// @include mat-core();
+// $primary: mat-palette($mat-indigo);
+// $accent: mat-palette($mat-pink, A200, A100, A400);
+// $warn: mat-palette($mat-red);
+// $theme: mat-light-theme($primary, $accent, $warn);
+// @include material-extensions-theme($theme);
+// @include material-extensions-experimental-theme($theme);
 html,
 body {
   height: 100%;
@@ -10,4 +18,149 @@ body {
 }
 .container {
   padding: 0 15px;
+}
+.mat-form-field {
+  width: 100%;
+}
+
+.slickgrid-container {
+  .slick-preheader-panel {
+    .slick-header-columns {
+      .slick-header-column {
+        display: flex !important;
+        justify-content: center !important;
+        border-right: 1px solid #9696 !important;
+        border-bottom: 1px solid #9696 !important;
+        box-sizing: content-box !important;
+
+        .slick-column-name {
+        }
+      }
+    }
+  }
+
+  .slick-header {
+    .slick-header-columns-left {
+      .slick-header-column {
+        border-right: 1px solid #9696 !important;
+        border-top: 1px solid #9696 !important;
+        .slick-column-name {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .grid-canvas {
+    .editable {
+      background: none !important;
+    }
+    .slick-row {
+      .slick-cell {
+        border-right: 1px solid #9696 !important;
+        border-bottom: 1px solid #9696 !important;
+      }
+      .slick-cell.active {
+        box-shadow: none !important;
+      }
+      &:last-child {
+        .slick-cell {
+          // border-bottom: 1px solid #9696 !important;
+        }
+      }
+    }
+  }
+}
+.mat-option {
+  width: 100%;
+}
+
+.inactive__header {
+  background-color: #a0a9b2 !important;
+  color: #fff !important;
+}
+
+.sub__header-material {
+  background-color: #dcebf1 !important;
+}
+
+.sub__header-process {
+  background-color: #fefedf !important;
+}
+
+.border {
+  border: 1px solid red !important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.angular-slickgrid {
+  margin: 10px 0;
+}
+
+snack-bar-container.success {
+  background-color: green;
+  color: white !important;
+}
+
+snack-bar-container.error {
+  background-color: red;
+  color: white !important;
+}
+
+snack-bar-container.notification {
+  font-size: 18px !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.dialog__title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog__title span {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.login-container {
+  min-height: 80vh;
+}
+
+.login-actions {
+  display: grid !important;
+  margin-left: unset !important;
+}
+
+.plant-item-header {
+  height: 50px;
+  background-color: #e2e3e5;
+  padding: 5px 8px;
+  color: #41464b;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  h3 {
+    margin: 0;
+  }
+}
+
+.report-item-header {
+  background-color: #e2e3e5;
+  padding: 5px;
+  color: #41464b;
+  h4 {
+    margin: 0;
+  }
+}
+
+.color-orange {
+  color: #fb8c00;
 }
