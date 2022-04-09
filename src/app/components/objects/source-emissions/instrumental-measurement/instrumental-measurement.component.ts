@@ -70,11 +70,6 @@ export class InstrumentalMeasurementComponent implements OnInit, OnChanges {
     this.defineGrid();
   }
 
-  goToEmissions(id: number): void {
-    this.areaId = id;
-    this.refreshList(id);
-  }
-
   refreshList(id: number) {
     this.sourceEmissionService
       .getSourceEmissionList(id, 'ins')
@@ -89,7 +84,7 @@ export class InstrumentalMeasurementComponent implements OnInit, OnChanges {
       });
   }
 
-  openInstrumentalDialog() {
+   openSourceEmissionDialog() {
     this.instrumentalFormRef = this.dialog.open(
       InstrumentalMeasurementFormComponent,
       {
@@ -265,7 +260,7 @@ export class InstrumentalMeasurementComponent implements OnInit, OnChanges {
           const id = args.dataContext.id;
           this.sourceEmissionId = id;
           if (args.dataContext.__hasChildren) {
-            this.openInstrumentalDialog();
+            this. openSourceEmissionDialog();
             this.instrumentalFormRef.componentInstance.editForm(id);
             this.instrumentalFormRef.componentInstance.form.disable();
             this.instrumentalFormRef.componentInstance.viewMode = true;
@@ -291,7 +286,7 @@ export class InstrumentalMeasurementComponent implements OnInit, OnChanges {
           this.sourceEmissionId = id;
 
           if (args.dataContext.__hasChildren) {
-            this.openInstrumentalDialog();
+            this. openSourceEmissionDialog();
             this.instrumentalFormRef.componentInstance.editForm(id);
           } else {
             this.openPollutantsDialog();

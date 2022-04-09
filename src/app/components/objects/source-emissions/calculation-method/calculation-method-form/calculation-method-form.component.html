@@ -1,0 +1,162 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 matDialogTitle>Добавить</h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>
+        {{
+          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.SOURCE_NAME"
+            | translate
+        }}</mat-label
+      >
+      <input type="text" matInput formControlName="sourceName" />
+      <mat-error>
+        {{ "ERROR" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <div
+      class="measurement"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      fxLayoutGap="10px"
+    >
+      <mat-form-field>
+        <mat-label>
+          {{
+            "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.MEASUREMENT_VALUE"
+              | translate
+          }}</mat-label
+        >
+        <input type="number" matInput formControlName="measurementValue" />
+        <mat-error>
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="dicFreqMeasurementId">
+          <mat-option
+            *ngFor="let dicFreqMeasurement of dicFreqMeasurements"
+            [value]="dicFreqMeasurement.id"
+            >{{ dicFreqMeasurement.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{
+          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.MATERIALS" | translate
+        }}</mat-label
+      >
+
+      <mtx-select
+        formControlName="materials"
+        [virtualScroll]="true"
+        [items]="materials"
+        bindValue="id"
+        bindLabel="name"
+        typeToSearchText="Пожалуйста, введите 2 или более символов"
+        [multiple]="true"
+        [hideSelected]="false"
+        [minTermLength]="2"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.name }}
+        </ng-template>
+
+        <ng-template ng-footer-tmp>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="openDicFormDialog('materials')"
+          >
+            {{ "DIC_FORM.ADD_DIC" | translate }}
+          </button>
+        </ng-template>
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{
+          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.CALC_METHODS"
+            | translate
+        }}</mat-label
+      >
+
+      <mtx-select
+        formControlName="calcMethods"
+        [virtualScroll]="true"
+        [items]="calcMethods"
+        bindValue="id"
+        bindLabel="name"
+        typeToSearchText="Пожалуйста, введите 2 или более символов"
+        [multiple]="true"
+        [hideSelected]="false"
+        [minTermLength]="2"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.name }}
+        </ng-template>
+
+        <ng-template ng-footer-tmp>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="openDicFormDialog('calcMethods')"
+          >
+            {{ "DIC_FORM.ADD_DIC" | translate }}
+          </button>
+        </ng-template>
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+    <div>
+      <label>
+        {{
+          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.COORDS" | translate
+        }}</label
+      >
+      <div
+        class="coords"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+        fxLayoutGap="10px"
+      >
+        <mat-form-field>
+          <mat-label> E </mat-label>
+          <input type="number" matInput formControlName="lat" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> N </mat-label>
+          <input type="number" matInput formControlName="lng" />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button color="warn" matDialogClose>
+      {{ "CANCEL" | translate }}
+    </button>
+    <button type="submit" mat-raised-button color="primary">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

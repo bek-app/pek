@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h3 mat-dialog-title>{{ dicTitle }}</h3>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>
+        {{ dicLabel }}
+      </mat-label>
+      <input
+        matInput
+        formControlName="name"
+        (keypress)="checkValue($event)"
+        (paste)="checkValue($event)"
+      />
+      <mat-error>
+        {{ "ERROR" | translate }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end">
+    <button type="button" mat-dialog-close mat-raised-button color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button type="submit" mat-raised-button color="primary">
+      {{ "ADD" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

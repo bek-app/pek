@@ -26,21 +26,6 @@
   </angular-slickgrid>
 </div>
 
-<!-- <nav mat-tab-nav-bar>
-  <a
-    mat-tab-link
-    *ngFor="let link of tabLinks"
-    [routerLink]="link.link"
-    routerLinkActive
-    #rla="routerLinkActive"
-    [active]="rla.isActive"
-  >
-    {{ link.label }}
-  </a>
-</nav>
-
-<router-outlet (activate)="onActivate($event)"></router-outlet> -->
-
 <ng-template #areaForm>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="dialog__title">
@@ -76,15 +61,20 @@
 
 <mat-tab-group>
   <mat-tab label="Инструментальный замер">
-    <div class="container">
-      <app-instrumental-measurement
-        [areaId]="areaId"
-      ></app-instrumental-measurement>
-    </div>
+    <ng-template matTabContent>
+      <div class="container">
+        <app-instrumental-measurement
+          [areaId]="areaId"
+        ></app-instrumental-measurement>
+      </div>
+    </ng-template>
   </mat-tab>
-  <mat-tab label="Расчетный метод"
-    ><div class="container">
-      <app-calculation-method></app-calculation-method>
-    </div>
+
+  <mat-tab label="Расчетный метод">
+    <ng-template matTabContent>
+      <div class="container">
+        <app-calculation-method [areaId]="areaId"></app-calculation-method>
+      </div>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

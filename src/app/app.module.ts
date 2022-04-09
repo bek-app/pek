@@ -28,6 +28,9 @@ import { PollutantsFormComponent } from './components/objects/source-emissions/p
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { CalculationMethodFormComponent } from './components/objects/source-emissions/calculation-method/calculation-method-form/calculation-method-form.component';
+import { DicFormComponent } from './components/dic-form/dic-form.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,8 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
     InstrumentalMeasurementFormComponent,
     PollutantsFormComponent,
     ConfirmationDialogComponent,
+    CalculationMethodFormComponent,
+    DicFormComponent,
   ],
   imports: [
     BrowserModule,

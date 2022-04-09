@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Dictionary } from '@models/dictionary.model';
-
+import { Dictionary } from '@models/dictionary/dictionary.model';
+ 
 @Injectable({
   providedIn: 'root',
 })

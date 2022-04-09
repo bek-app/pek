@@ -1,1 +1,24 @@
-<p>calculation-method works!</p>
+<div
+  class="calculation-header"
+  fxLayout="row"
+  fxLayoutAlign="space-between end"
+>
+  <button mat-raised-button color="primary" (click)="openSourceEmissionDialog()">
+    <mat-icon class="mat-18">add</mat-icon>{{ "CREATE" | translate }}
+  </button>
+
+  <h2>
+    {{ "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.TITLE" | translate }}
+  </h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="calculation-method"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [datasetHierarchical]="dataset"
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
