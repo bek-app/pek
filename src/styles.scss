@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/theming";
-//   @import "~@ng-matero/extensions/theming";
-// @include mat-core();
-// $primary: mat-palette($mat-indigo);
-// $accent: mat-palette($mat-pink, A200, A100, A400);
-// $warn: mat-palette($mat-red);
-// $theme: mat-light-theme($primary, $accent, $warn);
-// @include material-extensions-theme($theme);
-// @include material-extensions-experimental-theme($theme);
+@import "~@ng-matero/extensions/theming";
+@include mat-core();
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include material-extensions-theme($theme);
+@include material-extensions-experimental-theme($theme);
 html,
 body {
   height: 100%;

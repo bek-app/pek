@@ -1,0 +1,60 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 matDialogTitle>Добавить</h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>
+        {{
+          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.WASTE" | translate
+        }}</mat-label
+      >
+
+      <mtx-select
+        formControlName="dicPollutantId"
+        [virtualScroll]="true"
+        [items]="pollutants$ | async"
+        [loading]="loading"
+        [typeahead]="input$"
+        bindLabel="name"
+        typeToSearchText="Пожалуйста, введите 2 или более символов"
+        [multiple]="false"
+        [hideSelected]="false"
+        [trackByFn]="trackByFn"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.name }}
+        </ng-template>
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> Установленный норматив по ПДВ, ОВОС (г/с) </mat-label>
+      <input type="number" matInput formControlName="standartLimitGS" />
+      <mat-error> {{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> Установленный норматив по ПДВ, ОВОС (тонн/год) </mat-label>
+      <input type="number" matInput formControlName="standartLimitTons" />
+      <mat-error> {{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button type="button" color="warn" matDialogClose>
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button type="submit" color="primary">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

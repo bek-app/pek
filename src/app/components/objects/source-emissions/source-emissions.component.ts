@@ -1,4 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -17,6 +24,8 @@ import {
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SourceEmissionsService } from '@services/objects/source-emissions.service';
 import { MatDialog } from '@angular/material/dialog';
+import { InstrumentalMeasurementComponent } from './instrumental-measurement/instrumental-measurement.component';
+import { InstrumentalMeasurementFormComponent } from './instrumental-measurement/instrumental-measurement-form/instrumental-measurement-form.component';
 @Component({
   selector: 'app-source-emissions',
   templateUrl: './source-emissions.component.html',
@@ -38,14 +47,13 @@ export class SourceEmissionsComponent implements OnInit {
   tabLinks: any[] = [];
   activeLinkIndex = -1;
   viewMode = false;
-  @ViewChild('areaNameContent') areaNameContent!: TemplateRef<any>;
+  @ViewChild('areaForm') areaForm!: TemplateRef<any>;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
     this.dataViewObj = angularGrid.dataView;
   }
-
   constructor(
     private sourceEmissionsService: SourceEmissionsService,
     public fb: FormBuilder,
@@ -72,7 +80,7 @@ export class SourceEmissionsComponent implements OnInit {
   }
 
   openAreaDialog() {
-    this.dialog.open(this.areaNameContent, { width: '500px' });
+    this.dialog.open(this.areaForm, { width: '500px' });
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -109,7 +117,7 @@ export class SourceEmissionsComponent implements OnInit {
   }
 
   onActivate(componentReference: any) {
-    if (this.areaId !== undefined) {
+    if (this.areaId) {
       componentReference.goToEmissions(this.areaId);
     }
   }

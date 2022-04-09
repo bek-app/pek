@@ -32,7 +32,7 @@ import {
 } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline',
 };
@@ -63,6 +63,7 @@ const materialModules = [
   MatMenuModule,
   MatStepperModule,
   MatProgressBarModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

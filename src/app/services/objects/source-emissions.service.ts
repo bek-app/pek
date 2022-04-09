@@ -51,9 +51,9 @@ export class SourceEmissionsService {
   }
 
   //
-  getSourceEmissionById(id: number): Observable<SourceEmission[]> {
+  getSourceEmission(id: number): Observable<SourceEmission> {
     return this.http
-      .get<SourceEmission[]>(`api/SourceEmission?id=` + id)
+      .get<SourceEmission>(`api/SourceEmission?id=${id}`)
       .pipe(map((response) => response));
   }
 

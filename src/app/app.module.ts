@@ -21,9 +21,13 @@ import { GasMonitoringComponent } from './components/objects/gas-monitoring/gas-
 import { WasteWaterComponent } from './components/objects/waste-water/waste-water.component';
 import { WastePlaceComponent } from './components/objects/waste-place/waste-place.component';
 import { BurialPlaceComponent } from './components/objects/burial-place/burial-place.component';
-import { InstrumentalMeasurementComponent } from './components/objects/source-emissions/instrumental-measurement/instrumental-measurement.component';
 import { CalculationMethodComponent } from './components/objects/source-emissions/calculation-method/calculation-method.component';
-
+import { InstrumentalMeasurementComponent } from './components/objects/source-emissions/instrumental-measurement/instrumental-measurement.component';
+import { InstrumentalMeasurementFormComponent } from './components/objects/source-emissions/instrumental-measurement/instrumental-measurement-form/instrumental-measurement-form.component';
+import { PollutantsFormComponent } from './components/objects/source-emissions/pollutants-form/pollutants-form.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +45,9 @@ import { CalculationMethodComponent } from './components/objects/source-emission
     BurialPlaceComponent,
     InstrumentalMeasurementComponent,
     CalculationMethodComponent,
+    InstrumentalMeasurementFormComponent,
+    PollutantsFormComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,8 @@ import { CalculationMethodComponent } from './components/objects/source-emission
     FlexLayoutModule,
     CustomTranslateModule,
     SlickGridModule,
+    MtxGridModule,
+    MtxSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
