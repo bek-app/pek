@@ -1,21 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="dialog__title">
-    <h2 matDialogTitle>Добавить</h2>
+    <h2 matDialogTitle> {{ 'GAS_MONITORING.CONTROL_POINT.TITLE' | translate }}</h2>
     <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
   </div>
 
   <mat-dialog-content>
     <mat-form-field>
       <mat-label>
-        {{
-          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.SOURCE_NAME"
-            | translate
-        }}</mat-label
-      >
-      <input type="text" matInput formControlName="sourceName" />
-      <mat-error>
-        {{ "ERROR" | translate }}
-      </mat-error>
+        {{ "GAS_MONITORING.CONTROL_POINT.FORM.POINT_NUMBER" | translate }}
+      </mat-label>
+      <input type="text" matInput formControlName="pointNumber" />
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label
+        >{{ "GAS_MONITORING.CONTROL_POINT.FORM.OBSERVABLE_PARAM" | translate }}
+      </mat-label>
+      <input type="text" matInput formControlName="observableParam" />
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
     </mat-form-field>
 
     <div
@@ -27,8 +30,7 @@
       <mat-form-field>
         <mat-label>
           {{
-            "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.MEASUREMENT_VALUE"
-              | translate
+            "GAS_MONITORING.CONTROL_POINT.FORM.MEASUREMENT_VALUE" | translate
           }}</mat-label
         >
         <input type="number" matInput formControlName="measurementValue" />
@@ -48,25 +50,10 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field>
-      <mat-label>
-        {{
-          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.PROJECT_CAPACITY"
-            | translate
-        }}</mat-label
-      >
-      <input type="text" matInput formControlName="projectCapacity" />
-      <mat-error>
-        {{ "ERROR" | translate }}
-      </mat-error>
-    </mat-form-field>
-
     <div>
       <label>
-        {{
-          "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.FORM.COORDS" | translate
-        }}</label
-      >
+        {{ "GAS_MONITORING.CONTROL_POINT.FORM.COORDS" | translate }}
+      </label>
       <div
         class="coords"
         fxLayout="row"
@@ -86,8 +73,6 @@
     </div>
   </mat-dialog-content>
 
-
-
   <mat-dialog-actions
     fxLayout="row"
     fxLayoutAlign="end center"
@@ -96,7 +81,7 @@
     <button mat-raised-button color="warn" matDialogClose>
       {{ "CANCEL" | translate }}
     </button>
-    <button type="submit" mat-raised-button color="primary">
+    <button mat-raised-button color="primary" type="submit">
       {{ "SAVE" | translate }}
     </button>
   </mat-dialog-actions>

@@ -3,12 +3,16 @@
   fxLayout="row"
   fxLayoutAlign="space-between end"
 >
-  <button mat-raised-button color="primary" (click)="openSourceEmissionDialog()">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openSourceEmissionDialog()"
+  >
     <mat-icon class="mat-18">add</mat-icon>{{ "CREATE" | translate }}
   </button>
 
   <h2>
-    {{ "SOURCE_EMISSIONS.INSTRUMENTAL_MEASUREMENT.TITLE" | translate }}
+    {{ "SOURCE_EMISSIONS.CALCULATION_METHOD.TITLE" | translate }}
   </h2>
 </div>
 

@@ -77,10 +77,8 @@ export class ObjectsComponent implements OnInit {
     );
 
     this.objService.getObject(this.objectId).subscribe({
-      next: () => {
-        (data: ObjectModel) => {
-          this.pekObjects.push(data);
-        };
+      next: (data: any) => {
+        this.pekObjects.push(data);
       },
     });
 

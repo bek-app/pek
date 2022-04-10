@@ -30,6 +30,9 @@ import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { CalculationMethodFormComponent } from './components/objects/source-emissions/calculation-method/calculation-method-form/calculation-method-form.component';
 import { DicFormComponent } from './components/dic-form/dic-form.component';
+import { GasMonitoringFormComponent } from './components/objects/gas-monitoring/gas-monitoring-form/gas-monitoring-form.component';
+import { GasMonitoringPointsComponent } from './components/objects/gas-monitoring/gas-monitoring-points/gas-monitoring-points.component';
+import { PointsFormComponent } from './components/objects/gas-monitoring/gas-monitoring-points/points-form/points-form.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { DicFormComponent } from './components/dic-form/dic-form.component';
     ConfirmationDialogComponent,
     CalculationMethodFormComponent,
     DicFormComponent,
+    GasMonitoringFormComponent,
+    GasMonitoringPointsComponent,
+    PointsFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GasMonitoringComponent } from './gas-monitoring.component';
+import { PointsFormComponent } from './points-form.component';
 
-describe('GasMonitoringComponent', () => {
-  let component: GasMonitoringComponent;
-  let fixture: ComponentFixture<GasMonitoringComponent>;
+describe('PointsFormComponent', () => {
+  let component: PointsFormComponent;
+  let fixture: ComponentFixture<PointsFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GasMonitoringComponent ]
+      declarations: [ PointsFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GasMonitoringComponent);
+    fixture = TestBed.createComponent(PointsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
