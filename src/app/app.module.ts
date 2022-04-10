@@ -36,6 +36,7 @@ import { PointsFormComponent } from './components/objects/gas-monitoring/gas-mon
 import { WasteWaterFormComponent } from './components/objects/waste-water/waste-water-form/waste-water-form.component';
 import { WastePlaceFormComponent } from './components/objects/waste-place/waste-place-form/waste-place-form.component';
 import { BurialPlaceFormComponent } from './components/objects/burial-place/burial-place-form/burial-place-form.component';
+import { ReportFormComponent } from './components/report-list/report-form/report-form.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { BurialPlaceFormComponent } from './components/objects/burial-place/buri
     WasteWaterFormComponent,
     WastePlaceFormComponent,
     BurialPlaceFormComponent,
+    ReportFormComponent,
   ],
   imports: [
     BrowserModule,

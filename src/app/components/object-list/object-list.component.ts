@@ -12,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ObjectModel } from '@models/objects/object.model';
 import { ObjectsService } from '@services/objects/objects.service';
 import { ObjectFormComponent } from './object-form/object-form.component';
+import { ConfirmDialogModel } from '@models/confirm-dialog.model';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-object-list',
   templateUrl: './object-list.component.html',
@@ -202,11 +204,23 @@ export class ObjectListComponent implements OnInit {
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
           const id = args.dataContext.id;
-          if (confirm('Are you sure?')) {
-            this.objectsService.deleteObject(id).subscribe(() => {
-              this.refreshList();
-            });
-          }
+          const dialogData = new ConfirmDialogModel(
+            'Подтвердить действие',
+            'Вы уверены, что хотите удалить это?'
+          );
+
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            maxWidth: '400px',
+            data: dialogData,
+          });
+
+          dialogRef.afterClosed().subscribe((dialogResult: any) => {
+            if (dialogResult) {
+              this.objectsService.deleteObject(id).subscribe(() => {
+                this.refreshList();
+              });
+            }
+          });
         },
       },
     ];
@@ -214,7 +228,7 @@ export class ObjectListComponent implements OnInit {
     this.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
-      enablePagination: true,
+      enablePagination: false,
       pagination: {
         pageSizes: [5, 10, 20, 25, 50],
         pageSize: 20,

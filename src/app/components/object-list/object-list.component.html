@@ -1,20 +1,21 @@
 <div class="object-list">
-  <div class="object-header" fxLayout="row" fxLayoutAlign="space-between end">
+  <div class="object-header" fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-raised-button color="primary" (click)="openObjectDialog()">
       <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
     </button>
-    <h3>{{ "OBJECTS.TITLE" | translate }}</h3>
+    <h2>{{ "OBJECTS.TITLE" | translate }}</h2>
   </div>
-
-  <angular-slickgrid
-    gridId="object-list"
-    [columnDefinitions]="columnDefinitions"
-    [gridOptions]="gridOptions"
-    [dataset]="dataset"
-    (onClick)="
-      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
-    "
-    (onAngularGridCreated)="angularGridReady($any($event).detail)"
-  >
-  </angular-slickgrid>
+  <div class="angular-slickgrid">
+    <angular-slickgrid
+      gridId="object-list"
+      [columnDefinitions]="columnDefinitions"
+      [gridOptions]="gridOptions"
+      [dataset]="dataset"
+      (onClick)="
+        onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+      "
+      (onAngularGridCreated)="angularGridReady($any($event).detail)"
+    >
+    </angular-slickgrid>
+  </div>
 </div>

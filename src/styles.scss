@@ -14,10 +14,10 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 .is-active {
   font-weight: bold;
-  color: mat-color($warn, darker) !important;
+  color: mat-color($accent, darker) !important;
   background: rgba(0, 0, 0, 0.04);
 }
-
+ 
 html,
 body {
   height: 100%;
@@ -148,18 +148,6 @@ snack-bar-container.notification {
 .login-actions {
   display: grid !important;
   margin-left: unset !important;
-}
-
-.object-header {
-  height: 50px;
-  background-color: #e2e3e5;
-  padding: 5px 8px;
-  color: #41464b;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  h3 {
-    margin: 0;
-  }
 }
 
 .report-item-header {
