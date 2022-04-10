@@ -12,11 +12,9 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include material-extensions-theme($theme);
 @include material-extensions-experimental-theme($theme);
 @include angular-material-theme($theme);
-$slick-cell-odd-background-color: lightyellow;
-$slick-row-mouse-hover-color: lightgreen;
 .is-active {
   font-weight: bold;
-  color: mat-color($accent, darker) !important;
+  color: mat-color($warn, darker) !important;
   background: rgba(0, 0, 0, 0.04);
 }
 
@@ -152,7 +150,7 @@ snack-bar-container.notification {
   margin-left: unset !important;
 }
 
-.plant-item-header {
+.object-header {
   height: 50px;
   background-color: #e2e3e5;
   padding: 5px 8px;

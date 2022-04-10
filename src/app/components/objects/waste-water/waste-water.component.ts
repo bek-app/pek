@@ -149,6 +149,7 @@ export class WasteWaterComponent implements OnInit {
           this.wsWaterId = args.dataContext.id;
           this.openWasteWaterDialog();
           this.wsWaterFormRef.componentInstance.form.disable();
+          this.wsWaterFormRef.componentInstance.viewMode = true;
           this.wsWaterFormRef.componentInstance.editForm(this.wsWaterId);
         },
       },

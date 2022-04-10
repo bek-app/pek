@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WastePlaceComponent } from './waste-place.component';
+import { BurialPlaceFormComponent } from './burial-place-form.component';
 
-describe('WastePlaceComponent', () => {
-  let component: WastePlaceComponent;
-  let fixture: ComponentFixture<WastePlaceComponent>;
+describe('BurialPlaceFormComponent', () => {
+  let component: BurialPlaceFormComponent;
+  let fixture: ComponentFixture<BurialPlaceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WastePlaceComponent ]
+      declarations: [ BurialPlaceFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WastePlaceComponent);
+    fixture = TestBed.createComponent(BurialPlaceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

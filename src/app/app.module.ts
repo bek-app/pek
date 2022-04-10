@@ -34,6 +34,8 @@ import { GasMonitoringFormComponent } from './components/objects/gas-monitoring/
 import { GasMonitoringPointsComponent } from './components/objects/gas-monitoring/gas-monitoring-points/gas-monitoring-points.component';
 import { PointsFormComponent } from './components/objects/gas-monitoring/gas-monitoring-points/points-form/points-form.component';
 import { WasteWaterFormComponent } from './components/objects/waste-water/waste-water-form/waste-water-form.component';
+import { WastePlaceFormComponent } from './components/objects/waste-place/waste-place-form/waste-place-form.component';
+import { BurialPlaceFormComponent } from './components/objects/burial-place/burial-place-form/burial-place-form.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { WasteWaterFormComponent } from './components/objects/waste-water/waste-
     GasMonitoringPointsComponent,
     PointsFormComponent,
     WasteWaterFormComponent,
+    WastePlaceFormComponent,
+    BurialPlaceFormComponent,
   ],
   imports: [
     BrowserModule,
