@@ -13,7 +13,7 @@
         routerLink="/common/administration/users"
         class="nav-link"
         [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="active"
+        [routerLinkActive]="['is-active']"
       >
         <mat-icon>people</mat-icon> Пользователи
       </a>
@@ -22,7 +22,7 @@
         routerLink="/common/administration/verificator"
         class="nav-link"
         [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="active"
+        [routerLinkActive]="['is-active']"
       >
         <mat-icon class="mat-18">how_to_reg</mat-icon> Верификаторы
       </a>
@@ -32,7 +32,7 @@
         routerLink="/common/administration/declarant-list"
         class="nav-link"
         [routerLinkActiveOptions]="{ exact: true }"
-        routerLinkActive="active"
+        [routerLinkActive]="['is-active']"
       >
         <mat-icon class="mat-18">people_outline</mat-icon> Заявителей
       </a>
@@ -43,8 +43,8 @@
       routerLink="/common/object-list"
       class="nav-link"
       [routerLinkActiveOptions]="{ exact: true }"
-      routerLinkActive="active"
-    >
+      [routerLinkActive]="['is-active']"
+      >
       Обьекты
     </a>
 
@@ -53,8 +53,8 @@
       routerLink="/common/report-list"
       class="nav-link"
       [routerLinkActiveOptions]="{ exact: true }"
-      routerLinkActive="active"
-    >
+      [routerLinkActive]="['is-active']"
+      >
       Отчеты
     </a>
 
@@ -63,8 +63,8 @@
       routerLink="/common/cadaster-report-check"
       class="nav-link"
       [routerLinkActiveOptions]="{ exact: true }"
-      routerLinkActive="active"
-    >
+      [routerLinkActive]="['is-active']"
+      >
       Проверка
     </a>
 

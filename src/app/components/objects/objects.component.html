@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<nav mat-tab-nav-bar backgroundColor="primary">
+<!-- <nav mat-tab-nav-bar backgroundColor="primary">
   <a
     mat-tab-link
     *ngFor="let objRoute of objectsRoute"
@@ -27,4 +27,31 @@
     {{ objRoute.name }}
   </a>
 </nav>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+<hr />
+<mat-sidenav-container>
+  <mat-sidenav
+    opened
+    mode="side"
+    [fixedInViewport]="true"
+    [fixedTopGap]="170"
+    class="object-menu"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        [routerLink]="objRoute.src"
+        *ngFor="let objRoute of objectsRoute"
+        [routerLinkActive]="['is-active']"
+      >
+        {{ objRoute.name }}</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="object-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

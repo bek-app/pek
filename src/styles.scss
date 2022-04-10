@@ -2,12 +2,24 @@
 @import "~@angular/material/theming";
 @import "~@ng-matero/extensions/theming";
 @include mat-core();
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-pink, A200, A100, A400);
-$warn: mat-palette($mat-red);
+
+$primary: mat-palette($mat-blue-grey, 700);
+$accent: mat-palette($mat-deep-orange, 500, A100, A400);
+$warn: mat-palette($mat-red, 600);
+
 $theme: mat-light-theme($primary, $accent, $warn);
+
 @include material-extensions-theme($theme);
 @include material-extensions-experimental-theme($theme);
+@include angular-material-theme($theme);
+$slick-cell-odd-background-color: lightyellow;
+$slick-row-mouse-hover-color: lightgreen;
+.is-active {
+  font-weight: bold;
+  color: mat-color($accent, darker) !important;
+  background: rgba(0, 0, 0, 0.04);
+}
+
 html,
 body {
   height: 100%;
