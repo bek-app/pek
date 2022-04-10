@@ -1,1 +1,21 @@
-<p>waste-water works!</p>
+<div fxLayout="row" fxLayoutAlign="space-between end">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openWasteWaterDialog()"
+  >
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2 class="text">{{ "WASTE_WATER.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="waste-water"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>

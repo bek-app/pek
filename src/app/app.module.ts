@@ -33,6 +33,7 @@ import { DicFormComponent } from './components/dic-form/dic-form.component';
 import { GasMonitoringFormComponent } from './components/objects/gas-monitoring/gas-monitoring-form/gas-monitoring-form.component';
 import { GasMonitoringPointsComponent } from './components/objects/gas-monitoring/gas-monitoring-points/gas-monitoring-points.component';
 import { PointsFormComponent } from './components/objects/gas-monitoring/gas-monitoring-points/points-form/points-form.component';
+import { WasteWaterFormComponent } from './components/objects/waste-water/waste-water-form/waste-water-form.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PointsFormComponent } from './components/objects/gas-monitoring/gas-mon
     GasMonitoringFormComponent,
     GasMonitoringPointsComponent,
     PointsFormComponent,
+    WasteWaterFormComponent,
   ],
   imports: [
     BrowserModule,
