@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { OperationWasteModel } from '@models/operation-waste.model';
+import { OperationWasteModel } from '@models/reports/operation-waste/operation-waste.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,12 @@ export class OperationWasteService {
       'Content-Type': 'application/json; charset=utf-8 ',
     }),
   };
-  getOperationWasteById(id: number): Observable<OperationWasteModel[]> {
-    return this.http.get<OperationWasteModel[]>('api/OperationWaste?id=' + id);
+
+  getOperationWasteById(id: number): Observable<OperationWasteModel> {
+    return this.http.get<OperationWasteModel>('api/OperationWaste?id=' + id);
   }
-  getOperationWasteListById(id: number): Observable<OperationWasteModel[]> {
+
+  getOperationWasteListByReportId(id: number): Observable<OperationWasteModel[]> {
     return this.http.get<OperationWasteModel[]>(
       'api/OperationWaste/list?reportId=' + id
     );

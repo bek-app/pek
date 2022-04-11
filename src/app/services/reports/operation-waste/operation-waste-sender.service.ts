@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OperationWasteSenderModel } from '@models/operation-waste-sender.model';
+import { OperationWasteSenderModel } from '@models/reports/operation-waste/operation-waste.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +14,16 @@ export class OperationWasteSenderService {
       'Content-Type': 'application/json; charset=utf-8 ',
     }),
   };
+
   getOperationWasteSenderById(
     id: number
-  ): Observable<OperationWasteSenderModel[]> {
-    return this.http.get<OperationWasteSenderModel[]>(
+  ): Observable<OperationWasteSenderModel> {
+    return this.http.get<OperationWasteSenderModel>(
       'api/OperationWasteSender?id=' + id
     );
   }
-  getOperationWasteSenderListById(
+
+  getOperationWasteSenderListByReportId(
     id: number
   ): Observable<OperationWasteSenderModel[]> {
     return this.http.get<OperationWasteSenderModel[]>(
