@@ -48,6 +48,8 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { OperationWasteFormComponent } from './components/reports/operation-waste/operation-waste-form/operation-waste-form.component';
 import { OperationWasteSenderComponent } from './components/reports/operation-waste/operation-waste-sender/operation-waste-sender.component';
 import { OperationWasteSenderFormComponent } from './components/reports/operation-waste/operation-waste-sender/operation-waste-sender-form/operation-waste-sender-form.component';
+import { BurialWasteFormComponent } from './components/reports/burial-waste/burial-waste-form/burial-waste-form.component';
+import { ReceivingWasteFormComponent } from './components/reports/receiving-waste/receiving-waste-form/receiving-waste-form.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -93,6 +95,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     OperationWasteFormComponent,
     OperationWasteSenderComponent,
     OperationWasteSenderFormComponent,
+    BurialWasteFormComponent,
+    ReceivingWasteFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,105 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "BURIAL_WASTE.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label> {{ "BURIAL_WASTE.FORM.WASTE" | translate }} </mat-label>
+
+      <mtx-select
+        formControlName="dicWasteId"
+        [items]="wastes"
+        bindValue="id"
+        bindLabel="name"
+        appendTo="body"
+      >
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> {{ "BURIAL_WASTE.FORM.BURIAL_LIMIT" | translate }}</mat-label>
+      <input type="number" matInput formControlName="burialLimit" />
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "BURIAL_WASTE.FORM.GENERATED_VOLUME" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="generatedVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> Захороненный объем отходов (тонн) </mat-label>
+        <input type="number" matInput formControlName="burialVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "BURIAL_WASTE.FORM.ACTUAL_VOLUME" | translate }}</mat-label
+        >
+        <input type="number" matInput formControlName="actualVolume" />
+        <mat-error
+          *ngIf="
+        (f['actualVolume'].touched || submitted) &&
+        f['actualVolume'].errors?.['required']
+      "
+        >
+          {{ "ERROR" | translate }}</mat-error
+        >
+        <mat-error>
+          {{f['actualVolume'].errors?.['message']}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          {{ "BURIAL_WASTE.FORM.BURIAL_LIMIT" | translate }}</mat-label
+        >
+        <input type="number" matInput formControlName="burialLimit" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "ACCUMULATION_WASTE.FORM.PLACES" | translate }}
+      </mat-label>
+
+      <mtx-select
+        formControlName="places"
+        [closeOnSelect]="false"
+        [items]="places"
+        bindValue="id"
+        bindLabel="nameObject"
+        appendTo="body"
+        [multiple]="true"
+      >
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

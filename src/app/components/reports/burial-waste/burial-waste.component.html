@@ -1,1 +1,24 @@
-<p>burial-waste works!</p>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openBurialWasteFormDialog()"
+  >
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2>{{ "BURIAL_WASTE.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="burialWaste"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
