@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "ACCUMULATION_WASTE_SENDER.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE_SENDER.FORM.BIN_TRANSFERRED" | translate }}
+        </mat-label>
+
+        <input
+          matInput
+          formControlName="binTransferred"
+          type="text"
+          mask="separator"
+        />
+        <mat-error> {{ "ERROR" | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE_SENDER.FORM.NAME_TRANSFERRED" | translate }}
+        </mat-label>
+
+        <input matInput formControlName="nameTransferred" type="text" />
+        <mat-error> {{ "ERROR" | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label
+        >{{ "ACCUMULATION_WASTE_SENDER.FORM.VOLUME_TRANSFERRED" | translate }}
+      </mat-label>
+      <input matInput formControlName="transferredVolume" type="number" />
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

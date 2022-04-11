@@ -1,1 +1,45 @@
-<p>reports works!</p>
+<div class="reports-header">
+  <div class="">
+    <strong> {{ "REPORT" | translate }}: </strong>
+
+    {{ report.kvartal + " Квартал " + report.reportYear + " год" }}
+  </div>
+
+  <div class="">
+    <strong> {{ "OBJECT" | translate }}: </strong> {{ report.objectName }}
+  </div>
+  <div class="">
+    <strong>({{ " " + report.oblastName }})</strong>
+  </div>
+
+  <button mat-raised-button color="accent" (click)="send()">
+    {{ "SUBSCRIBE_SEND" | translate }}
+  </button>
+</div>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    opened
+    mode="side"
+    [fixedInViewport]="true"
+    [fixedTopGap]="185"
+    class="report-menu"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let rep of reportRoute"
+        [routerLink]="rep.src"
+        [routerLinkActive]="['is-active']"
+      >
+        {{ rep.name }}</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="report-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

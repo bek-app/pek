@@ -37,7 +37,20 @@ import { WasteWaterFormComponent } from './components/objects/waste-water/waste-
 import { WastePlaceFormComponent } from './components/objects/waste-place/waste-place-form/waste-place-form.component';
 import { BurialPlaceFormComponent } from './components/objects/burial-place/burial-place-form/burial-place-form.component';
 import { ReportFormComponent } from './components/report-list/report-form/report-form.component';
+import { AccumulationWasteComponent } from './components/reports/accumulation-waste/accumulation-waste.component';
+import { OperationWasteComponent } from './components/reports/operation-waste/operation-waste.component';
+import { BurialWasteComponent } from './components/reports/burial-waste/burial-waste.component';
+import { ReceivingWasteComponent } from './components/reports/receiving-waste/receiving-waste.component';
+import { AccumulationWasteSenderComponent } from './components/reports/accumulation-waste/accumulation-waste-sender/accumulation-waste-sender.component';
+import { AccumulationWasteSenderFormComponent } from './components/reports/accumulation-waste/accumulation-waste-sender/accumulation-waste-sender-form/accumulation-waste-sender-form.component';
+import { AccumulationWasteFormComponent } from './components/reports/accumulation-waste/accumulation-waste-form/accumulation-waste-form.component';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +80,13 @@ import { ReportFormComponent } from './components/report-list/report-form/report
     WastePlaceFormComponent,
     BurialPlaceFormComponent,
     ReportFormComponent,
+    AccumulationWasteComponent,
+    OperationWasteComponent,
+    BurialWasteComponent,
+    ReceivingWasteComponent,
+    AccumulationWasteFormComponent,
+    AccumulationWasteSenderComponent,
+    AccumulationWasteSenderFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +100,7 @@ import { ReportFormComponent } from './components/report-list/report-form/report
     SlickGridModule,
     MtxGridModule,
     MtxSelectModule,
+    NgxMaskModule.forRoot(maskConfigFunction),
   ],
   providers: [],
   bootstrap: [AppComponent],

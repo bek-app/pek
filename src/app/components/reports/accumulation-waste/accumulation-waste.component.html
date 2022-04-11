@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="primary" (click)="openAccWasteDialog()">
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2>{{ "ACCUMULATION_WASTE.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="accumulationWaste"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
+
+<app-accumulation-waste-sender
+  [accWasteId]="accWasteId"
+></app-accumulation-waste-sender>

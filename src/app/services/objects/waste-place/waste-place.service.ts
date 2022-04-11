@@ -14,7 +14,7 @@ export class WastePlaceService {
     }),
   };
 
-  getWastePlaceList(reportId: number): Observable<any[]> {
+  getWastePlaceByReportId(reportId: number): Observable<any[]> {
     return this.http.get<any[]>(
       'api/WastePlaceStorage/getByReport?reportId=' + reportId
     );

@@ -1,0 +1,143 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "ACCUMULATION_WASTE.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label> {{ "ACCUMULATION_WASTE.FORM.WASTE" | translate }} </mat-label>
+
+      <mtx-select
+        formControlName="dicWasteId"
+        [items]="wastes"
+        bindValue="id"
+        bindLabel="name"
+        appendTo="body"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.name }}
+        </ng-template>
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "ACCUMULATION_WASTE.FORM.STORAGE_LIMIT" | translate }}</mat-label
+      >
+      <input type="number" matInput formControlName="storageLimit" />
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE.FORM.BEGIN_BALANCE" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="beginBalance" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE.FORM.GENERATED_VOLUME" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="generatedVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE.FORM.OPERATION_VOLUME" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="operationVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Переданный объем (тонн) </mat-label>
+        <input type="number" matInput formControlName="transferredVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE.FORM.END_BALANCE" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="endBalance" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label
+          >{{ "ACCUMULATION_WASTE.FORM.ACTUAL_VOLUME" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="actualVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "ACCUMULATION_WASTE.FORM.MEASUREMENT_VALUE" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="measurementValue" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="dicFreqMeasurementId">
+          <mat-option [value]="0"> Выбрать </mat-option>
+          <mat-option
+            *ngFor="let dicFreqMeasurement of dicFreqMeasurements"
+            [value]="dicFreqMeasurement.id"
+          >
+            {{ dicFreqMeasurement.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "ACCUMULATION_WASTE.FORM.PLACES" | translate }}
+      </mat-label>
+
+      <mtx-select
+        formControlName="places"
+        [closeOnSelect]="false"
+        [items]="places"
+        bindValue="id"
+        bindLabel="nameObject"
+        appendTo="body"
+        [multiple]="true"
+      >
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

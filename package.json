@@ -29,6 +29,7 @@
     "angular-slickgrid": "^4.1.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
+    "ngx-mask": "^13.1.8",
     "rxjs": "~7.4.0",
     "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",

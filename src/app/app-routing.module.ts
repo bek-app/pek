@@ -11,6 +11,10 @@ import { SourceEmissionsComponent } from './components/objects/source-emissions/
 import { WastePlaceComponent } from './components/objects/waste-place/waste-place.component';
 import { WasteWaterComponent } from './components/objects/waste-water/waste-water.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
+import { AccumulationWasteComponent } from './components/reports/accumulation-waste/accumulation-waste.component';
+import { BurialWasteComponent } from './components/reports/burial-waste/burial-waste.component';
+import { OperationWasteComponent } from './components/reports/operation-waste/operation-waste.component';
+import { ReceivingWasteComponent } from './components/reports/receiving-waste/receiving-waste.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { CommonComponent } from './layouts/common/common.component';
 
@@ -66,7 +70,18 @@ const routes: Routes = [
         ],
       },
       { path: 'report-list', component: ReportListComponent },
-      { path: 'reports/:id', component: ReportsComponent },
+      {
+        path: 'reports/:id',
+        component: ReportsComponent,
+        children: [
+          { path: '', redirectTo: 'accumulation-waste', pathMatch: 'full' },
+
+          { path: 'accumulation-waste', component: AccumulationWasteComponent },
+          { path: 'burial-waste', component: BurialWasteComponent },
+          { path: 'operation-waste', component: OperationWasteComponent },
+          { path: 'receiving-waste', component: ReceivingWasteComponent },
+        ],
+      },
     ],
   },
 ];
