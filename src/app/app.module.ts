@@ -46,6 +46,8 @@ import { AccumulationWasteSenderFormComponent } from './components/reports/accum
 import { AccumulationWasteFormComponent } from './components/reports/accumulation-waste/accumulation-waste-form/accumulation-waste-form.component';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { OperationWasteFormComponent } from './components/reports/operation-waste/operation-waste-form/operation-waste-form.component';
+import { OperationWasteSenderComponent } from './components/reports/operation-waste/operation-waste-sender/operation-waste-sender.component';
+import { OperationWasteSenderFormComponent } from './components/reports/operation-waste/operation-waste-sender/operation-waste-sender-form/operation-waste-sender-form.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -89,6 +91,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     AccumulationWasteSenderComponent,
     AccumulationWasteSenderFormComponent,
     OperationWasteFormComponent,
+    OperationWasteSenderComponent,
+    OperationWasteSenderFormComponent,
   ],
   imports: [
     BrowserModule,

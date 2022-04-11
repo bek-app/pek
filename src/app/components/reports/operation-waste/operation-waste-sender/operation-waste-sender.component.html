@@ -1,13 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <button mat-raised-button color="primary" (click)="openOperWsFormDialog()">
+  <button mat-raised-button color="primary" (click)="openOperWsSenderFormDialog()">
     <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
   </button>
-  <h2>{{ "OPERATION_WASTE.TITLE" | translate }}</h2>
+  <h2>{{ "OPERATION_WASTE_SENDER.TITLE" | translate }}</h2>
 </div>
 
 <div class="angular-slickgrid">
   <angular-slickgrid
-    gridId="operationWaste"
+    gridId="operationWasteSender"
     [columnDefinitions]="columnDefinitions"
     [gridOptions]="gridOptions"
     [dataset]="dataset"
@@ -18,6 +18,3 @@
   >
   </angular-slickgrid>
 </div>
-
-<app-operation-waste-sender [operationWasteId]="operationWasteId">
-</app-operation-waste-sender>
