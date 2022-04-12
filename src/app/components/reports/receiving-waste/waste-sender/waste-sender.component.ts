@@ -6,8 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { WasteAfterOperationModel } from '@models/reports/receiving-waste/waste-after-operation.model';
-import { WasteAfterOperationService } from '@services/reports/receiving-waste/waste-after-operation.service';
+import { WasteSenderModel } from '@models/reports/receiving-waste/waste-sender.model';
+import { WasteSenderService } from '@services/reports/receiving-waste/waste-sender.service';
 import {
   AngularGridInstance,
   Column,
@@ -15,22 +15,22 @@ import {
   GridOption,
   OnEventArgs,
 } from 'angular-slickgrid';
-import { WasteAfterOperationFormComponent } from './waste-after-operation-form/waste-after-operation-form.component';
+import { WasteSenderFormComponent } from './waste-sender-form/waste-sender-form.component';
 @Component({
-  selector: 'app-waste-after-operation',
-  templateUrl: './waste-after-operation.component.html',
-  styleUrls: ['./waste-after-operation.component.scss'],
+  selector: 'app-waste-sender',
+  templateUrl: './waste-sender.component.html',
+  styleUrls: ['./waste-sender.component.scss'],
 })
-export class WasteAfterOperationComponent implements OnInit, OnChanges {
+export class WasteSenderComponent implements OnInit, OnChanges {
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
-  dataset: WasteAfterOperationModel[] = [];
+  dataset: WasteSenderModel[] = [];
   gridObj: any;
   dataViewObj: any;
   @Input() receivingWasteId!: number;
-  afterOperationId!: number;
   formDialogRef: any;
+  wasteSenderId!: number;
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
@@ -38,8 +38,8 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
   }
 
   constructor(
-    private dialog: MatDialog,
-    private wasteAfterOperationService: WasteAfterOperationService
+    private wasteSenderService: WasteSenderService,
+    private dialog: MatDialog
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,15 +51,21 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
   }
 
   refreshList(id: number) {
-    this.wasteAfterOperationService
-      .getWasteAfterOperationListById(id)
-      .subscribe((data: WasteAfterOperationModel[]) => {
+    this.wasteSenderService
+      .getWasteSenderListById(id)
+      .subscribe((data: WasteSenderModel[]) => {
         this.dataset = data;
       });
   }
 
+  onCellClicked(e: any, args: any) {
+    const item = this.gridObj.getDataItem(args.row);
+    this.wasteSenderId = item.id;
+  }
+
   openFormDialog() {
-    this.formDialogRef = this.dialog.open(WasteAfterOperationFormComponent, {
+    this.formDialogRef = this.dialog.open(WasteSenderFormComponent, {
+      width: '600px',
       data: { receivingWasteId: this.receivingWasteId },
     });
     this.formDialogRef
@@ -67,41 +73,27 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
       .subscribe(() => this.refreshList(this.receivingWasteId));
   }
 
-  onCellClicked(e: any, args: any) {
-    const item = this.gridObj.getDataItem(args.row);
-    this.afterOperationId = item.id;
-  }
-
   defineGrid() {
     this.columnDefinitions = [
       {
-        id: 'dicWasteName',
-        name: 'Вид образованного отхода после проведения операции с изначальным видом отхода',
-        field: 'dicWasteName',
+        id: 'binTransferred',
+        name: 'БИН организации ',
+        field: 'binTransferred',
+        filterable: true,
+        sortable: true,
+      },
+      {
+        id: 'nameTransferred',
+        name: 'Наименование организации ',
+        field: 'nameTransferred',
       },
 
       {
-        id: 'dicKindOperationName',
-        name: 'Вид операции с образованным после проведения операции отхода',
-        field: 'dicKindOperationName',
-        filterable: true,
-        sortable: true,
+        id: 'transferredVolume',
+        name: 'Переданный объем отхода, после операции с ними, тонна',
+        field: 'transferredVolume',
       },
 
-      {
-        id: 'generatedVolume',
-        name: ' Объем образованного отхода после проведения операции с изначальным видом отхода, (тонна)',
-        field: 'generatedVolume',
-        filterable: true,
-        sortable: true,
-      },
-      {
-        id: 'reoperationVolume',
-        name: ' Объем отхода, направленный на проведение повторной операций с ними,(тонна)',
-        field: 'reoperationVolume',
-        filterable: true,
-        sortable: true,
-      },
       {
         id: 'view',
         field: 'id',
@@ -113,7 +105,7 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
           this.openFormDialog();
-          this.formDialogRef.componentInstance.editForm(this.afterOperationId);
+          this.formDialogRef.componentInstance.editForm(this.wasteSenderId);
           this.formDialogRef.componentInstance.form.disable();
           this.formDialogRef.componentInstance.viewMode = true;
         },
@@ -129,7 +121,7 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
           this.openFormDialog();
-          this.formDialogRef.componentInstance.editForm(this.afterOperationId);
+          this.formDialogRef.componentInstance.editForm(this.wasteSenderId);
         },
       },
       {
@@ -144,11 +136,9 @@ export class WasteAfterOperationComponent implements OnInit, OnChanges {
         onCellClick: (e: Event, args: OnEventArgs) => {
           const id = args.dataContext.id;
           if (confirm('Are you sure?')) {
-            this.wasteAfterOperationService
-              .deleteWasteAfterOperation(id)
-              .subscribe(() => {
-                this.refreshList(this.receivingWasteId);
-              });
+            this.wasteSenderService.deleteWasteSender(id).subscribe(() => {
+              this.refreshList(this.receivingWasteId);
+            });
           }
         },
       },

@@ -56,6 +56,8 @@ import WasteOperationListComponent from './components/reports/receiving-waste/wa
 import { WasteOperationFormComponent } from './components/reports/receiving-waste/waste-operation-list/waste-operation-form/waste-operation-form.component';
 import { WasteAfterOperationComponent } from './components/reports/receiving-waste/waste-after-operation/waste-after-operation.component';
 import { WasteAfterOperationFormComponent } from './components/reports/receiving-waste/waste-after-operation/waste-after-operation-form/waste-after-operation-form.component';
+import { WasteSenderComponent } from './components/reports/receiving-waste/waste-sender/waste-sender.component';
+import { WasteSenderFormComponent } from './components/reports/receiving-waste/waste-sender/waste-sender-form/waste-sender-form.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -109,6 +111,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     WasteOperationFormComponent,
     WasteAfterOperationComponent,
     WasteAfterOperationFormComponent,
+    WasteSenderComponent,
+    WasteSenderFormComponent,
   ],
   imports: [
     BrowserModule,

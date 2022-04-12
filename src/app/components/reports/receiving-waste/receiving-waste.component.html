@@ -61,7 +61,11 @@
   "
   >
     <ng-template matTabContent>
-      <div class="container"></div>
+      <div class="container">
+        <app-waste-sender
+          [receivingWasteId]="receivingWasteId"
+        ></app-waste-sender>
+      </div>
     </ng-template>
   </mat-tab>
 
