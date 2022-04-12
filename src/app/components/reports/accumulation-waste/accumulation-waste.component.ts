@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -10,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AccumulationWasteModel } from '@models/reports/accumulation-waste/accumulation-waste.model';
 import { AccumulationWasteService } from '@services/reports/accumulation-waste/accumulation-waste.service';
 import { MatDialog } from '@angular/material/dialog';
- import { ConfirmDialogModel } from '@models/confirm-dialog.model';
+import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { AccumulationWasteFormComponent } from './accumulation-waste-form/accumulation-waste-form.component';
 @Component({
@@ -247,13 +252,12 @@ export class AccumulationWasteComponent implements OnInit {
           dialogRef.afterClosed().subscribe((dialogResult: any) => {
             if (dialogResult) {
               this.accumulationService
-              .deleteAccumulationWaste(id)
-              .subscribe(() => {
-                this.refreshList(this.reportId);
-              });
+                .deleteAccumulationWaste(id)
+                .subscribe(() => {
+                  this.refreshList(this.reportId);
+                });
             }
           });
-
         },
       },
     ];

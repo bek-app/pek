@@ -1,4 +1,4 @@
-export interface ReceivingWasteAfterOperationModel {
+export interface WasteAfterOperationModel {
   id: number;
   dicWasteId: number;
   dicWasteName: string;

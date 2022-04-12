@@ -1,1 +1,65 @@
-<p>receiving-waste works!</p>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openReceivingWasteFormDialog()"
+  >
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2>{{ "RECEIVING_WASTE.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="receivingWaste"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="Список организации, от которого получен отход">
+    <ng-template matTabContent>
+      <div class="container">
+        <app-received-waste-list [receivingWasteId]="receivingWasteId">
+        </app-received-waste-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Направленные на проведение операций">
+    <ng-template matTabContent>
+      <div class="container"></div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab
+    label="Вид образованного отхода после проведения операции с изначальным видом отхода
+  "
+  >
+    <ng-template matTabContent>
+      <div class="container"></div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab
+    label="Переданный объем отхода после операции с ними
+  "
+  >
+    <ng-template matTabContent>
+      <div class="container"></div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Организации, которому передан оставшиеся объем отходов">
+    <ng-template matTabContent>
+      <div class="container"></div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

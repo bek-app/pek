@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReceivingWasteModel } from '@models/receiving-waste.model';
-import { Observable, Subject } from 'rxjs';
+import { ReceivingWasteModel } from '@models/reports/receiving-waste/receiving-waste.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,11 @@ export class ReceivingWasteService {
       'Content-Type': 'application/json; charset=utf-8 ',
     }),
   };
-  refreshListWasteId = new Subject();
-  getReceivingWasteById(id: number): Observable<ReceivingWasteModel[]> {
-    return this.http.get<ReceivingWasteModel[]>('api/ReceivingWaste?id=' + id);
+
+  getReceivingWasteById(id: number): Observable<ReceivingWasteModel> {
+    return this.http.get<ReceivingWasteModel>('api/ReceivingWaste?id=' + id);
   }
+
   getReceivingWasteListByReportId(
     reportId: number
   ): Observable<ReceivingWasteModel[]> {
@@ -25,7 +26,8 @@ export class ReceivingWasteService {
       'api/ReceivingWaste/list?reportId=' + reportId
     );
   }
-  addReceivingWaste(
+
+  addOrUpdateReceivingWaste(
     data: ReceivingWasteModel
   ): Observable<ReceivingWasteModel> {
     return this.http.put<ReceivingWasteModel>(
@@ -34,15 +36,7 @@ export class ReceivingWasteService {
       this.httpOptions
     );
   }
-  updateReceivingWaste(
-    data: ReceivingWasteModel
-  ): Observable<ReceivingWasteModel> {
-    return this.http.put<ReceivingWasteModel>(
-      'api/ReceivingWaste',
-      JSON.stringify(data),
-      this.httpOptions
-    );
-  }
+
   deleteReceivingWaste(id: number): Observable<ReceivingWasteModel> {
     return this.http.delete<ReceivingWasteModel>(
       'api/ReceivingWaste?id=' + id,

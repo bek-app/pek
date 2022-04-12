@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnChanges,
@@ -19,7 +20,6 @@ import {
   OnEventArgs,
 } from 'angular-slickgrid';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
-import { AccumulationWasteFormComponent } from '../accumulation-waste-form/accumulation-waste-form.component';
 import { AccumulationWasteSenderFormComponent } from './accumulation-waste-sender-form/accumulation-waste-sender-form.component';
 @Component({
   selector: 'app-accumulation-waste-sender',
@@ -44,7 +44,6 @@ export class AccumulationWasteSenderComponent implements OnInit, OnChanges {
 
   constructor(
     private accumulationWasteSenderService: AccumulationWasteSenderService,
-    private accWasteService: AccumulationWasteService,
     private dialog: MatDialog
   ) {}
 
