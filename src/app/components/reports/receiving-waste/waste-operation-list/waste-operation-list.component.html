@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openWasteOperationFormDialog()"
+  >
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2>{{ "RECEIVING_WASTE_OPERATION.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="waste-operation"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>
