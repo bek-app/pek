@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ReceivingWasteAfterOperationService {
+export class WasteAfterOperationService {
   private readonly apiUrl = 'api/ReceivingWasteAfterOperation';
   constructor(private http: HttpClient) {}
 

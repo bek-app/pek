@@ -1,0 +1,86 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "RECEIVING_WASTE_AFTER_OPERATION.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>
+        {{ "RECEIVING_WASTE_AFTER_OPERATION.FORM.WASTE" | translate }}
+      </mat-label>
+
+      <mtx-select
+        formControlName="dicWasteId"
+        [items]="wasteList"
+        bindValue="id"
+        bindLabel="name"
+        appendTo="body"
+      >
+      </mtx-select>
+
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "RECEIVING_WASTE_AFTER_OPERATION.FORM.KIND_OPERATION" | translate }}
+      </mat-label>
+
+      <mtx-select
+        [items]="dicKindOperationList"
+        bindValue="id"
+        bindLabel="name"
+        formControlName="dicKindOperationId"
+        appendTo="body"
+      >
+      </mtx-select>
+
+      <mat-error
+        *ngIf="
+        (f['dicKindOperationId'].touched || submitted) &&
+        f['dicKindOperationId'].errors?.['required']
+      "
+      >
+        {{ "ERROR" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label
+          >{{
+            "RECEIVING_WASTE_AFTER_OPERATION.FORM.GENERATED_VOLUME" | translate
+          }}
+        </mat-label>
+        <input type="number" matInput formControlName="generatedVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          {{
+            "RECEIVING_WASTE_AFTER_OPERATION.FORM.REOPERATION_VOLUME"
+              | translate
+          }}
+        </mat-label>
+        <input type="number" matInput formControlName="reoperationVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>
