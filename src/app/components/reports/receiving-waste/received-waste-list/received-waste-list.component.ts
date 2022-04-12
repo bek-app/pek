@@ -30,6 +30,7 @@ export class ReceivedWasteListComponent implements OnInit {
   dataViewObj: any;
   @Input() receivingWasteId!: number;
   receivedFormRef: any;
+  receivedWasteId!: number;
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
@@ -55,6 +56,11 @@ export class ReceivedWasteListComponent implements OnInit {
       .subscribe((data: ReceivedWasteModel[]) => {
         this.dataset = data;
       });
+  }
+
+  onCellClicked(e: any, args: any) {
+    const item = this.gridObj.getDataItem(args.row);
+    this.receivedWasteId = item.id;
   }
 
   openReceivedFormDialog() {
@@ -111,7 +117,12 @@ export class ReceivedWasteListComponent implements OnInit {
         formatter: () => `<i class="fa fa-eye pointer"></i>`,
         minWidth: 30,
         maxWidth: 30,
-        onCellClick: (e: Event, args: OnEventArgs) => {},
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          this.openReceivedFormDialog();
+          this.receivedFormRef.componentInstance.editForm(this.receivedWasteId);
+          this.receivedFormRef.componentInstance.form.disable();
+          this.receivedFormRef.componentInstance.viewMode = true;
+        },
       },
       {
         id: 'edit',
@@ -122,7 +133,10 @@ export class ReceivedWasteListComponent implements OnInit {
         formatter: Formatters.editIcon,
         minWidth: 30,
         maxWidth: 30,
-        onCellClick: (e: Event, args: OnEventArgs) => {},
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          this.openReceivedFormDialog();
+          this.receivedFormRef.componentInstance.editForm(this.receivedWasteId);
+        },
       },
       {
         id: 'delete',

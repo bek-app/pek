@@ -1,1 +1,83 @@
-<p>received-waste-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "OPERATION_WASTE_SENDER.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "RECEIVING_WASTE_RECEIVED.FORM.BIN_TRANSFERRED" | translate }}
+        </mat-label>
+
+        <input
+          matInput
+          formControlName="binTransferred"
+          type="text"
+          mask="separator"
+          maxlength="15"
+        />
+        <mat-error
+          *ngIf="
+          (f['binTransferred'].touched || submitted) &&
+          f['binTransferred'].errors?.['required']
+        "
+        >
+          {{
+            "RECEIVING_WASTE_RECEIVED.VALIDATION.BIN_TRANSFERRED" | translate
+          }}
+        </mat-error>
+        <mat-error
+          *ngIf="
+          (f['binTransferred'].touched || submitted) &&
+          f['binTransferred'].errors?.['pattern']
+        "
+        >
+          {{
+            "RECEIVING_WASTE_RECEIVED.VALIDATION.BIN_TRANSFERRED_PATTERN"
+              | translate
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          Наименование организации, от которого получен отход</mat-label
+        >
+
+        <input matInput formControlName="nameTransferred" type="text" />
+        <mat-error
+          *ngIf="
+            (f['nameTransferred'].touched || submitted) &&
+            f['nameTransferred'].errors?.['required']
+          "
+        >
+          {{ "OPERATION_WASTE_SENDER.VALIDATION.BIN_TRANSFERRED" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "RECEIVING_WASTE_RECEIVED.FORM.VOLUME_TRANSFERRED" | translate }}
+      </mat-label>
+      <input matInput formControlName="transferredVolume" type="number" />
+      <mat-error> {{ "ERROR" | translate }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>
