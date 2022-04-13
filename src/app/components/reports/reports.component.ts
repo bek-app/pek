@@ -61,16 +61,16 @@ export class ReportsComponent implements OnInit {
         name: 'Производственный мониторинг',
       },
       { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
-      // {
-      //   index: 7,
-      //   src: 'air-calc-method',
-      //   name: 'Результаты на основе расчетов ',
-      // },
-      // {
-      //   index: 8,
-      //   src: 'radiation-list',
-      //   name: 'Сведения по радиационному мониторингу',
-      // },
+      {
+        index: 7,
+        src: 'air-calc-method',
+        name: 'Результаты на основе расчетов ',
+      },
+      {
+        index: 8,
+        src: 'radiation-list',
+        name: 'Сведения по радиационному мониторингу',
+      },
     ];
   }
 

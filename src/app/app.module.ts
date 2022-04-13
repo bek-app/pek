@@ -63,6 +63,7 @@ import { WasteRemainingFormComponent } from './components/reports/receiving-wast
 import { LabarotoryListComponent } from './components/reports/labarotory-list/labarotory-list.component';
 import { LabarotoryFormComponent } from './components/reports/labarotory-list/labarotory-form/labarotory-form.component';
 import { AirAreaListComponent } from './components/reports/air-area-list/air-area-list.component';
+import { AirCalcMethodComponent } from './components/reports/air-calc-method/air-calc-method.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -123,6 +124,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     LabarotoryListComponent,
     LabarotoryFormComponent,
     AirAreaListComponent,
+    AirCalcMethodComponent,
   ],
   imports: [
     BrowserModule,

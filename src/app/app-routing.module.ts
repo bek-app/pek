@@ -13,6 +13,7 @@ import { WasteWaterComponent } from './components/objects/waste-water/waste-wate
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { AccumulationWasteComponent } from './components/reports/accumulation-waste/accumulation-waste.component';
 import { AirAreaListComponent } from './components/reports/air-area-list/air-area-list.component';
+import { AirCalcMethodComponent } from './components/reports/air-calc-method/air-calc-method.component';
 import { BurialWasteComponent } from './components/reports/burial-waste/burial-waste.component';
 import { LabarotoryListComponent } from './components/reports/labarotory-list/labarotory-list.component';
 import { OperationWasteComponent } from './components/reports/operation-waste/operation-waste.component';
@@ -89,6 +90,10 @@ const routes: Routes = [
           {
             path: 'air-area-list',
             component: AirAreaListComponent,
+          },
+          {
+            path: 'air-calc-method',
+            component: AirCalcMethodComponent,
           },
         ],
       },
