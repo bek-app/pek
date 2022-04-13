@@ -23,9 +23,10 @@ import {
 } from 'angular-slickgrid';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SourceEmissionsService } from '@services/objects/source-emissions.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { InstrumentalMeasurementComponent } from './instrumental-measurement/instrumental-measurement.component';
 import { InstrumentalMeasurementFormComponent } from './instrumental-measurement/instrumental-measurement-form/instrumental-measurement-form.component';
+import { SourceEmissionMapComponent } from './source-emission-map/source-emission-map.component';
 @Component({
   selector: 'app-source-emissions',
   templateUrl: './source-emissions.component.html',
@@ -48,7 +49,7 @@ export class SourceEmissionsComponent implements OnInit {
   activeLinkIndex = -1;
   viewMode = false;
   @ViewChild('areaForm') areaForm!: TemplateRef<any>;
-
+  formDialogRef!: any;
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
@@ -64,23 +65,12 @@ export class SourceEmissionsComponent implements OnInit {
     this.form = this.fb.group({
       areaName: new FormControl('', [Validators.required]),
     });
-
-    this.tabLinks = [
-      {
-        label: 'Инструментальный замер',
-        link: './instrumental-measurement',
-        index: 0,
-      },
-      {
-        label: 'Расчетный метод',
-        link: './calculation-method',
-        index: 1,
-      },
-    ];
   }
 
   openAreaDialog() {
-    this.dialog.open(this.areaForm, { width: '500px' });
+    this.formDialogRef = this.dialog.open(this.areaForm, { width: '500px' });
+    this.form.enable();
+    this.viewMode = false;
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -157,6 +147,13 @@ export class SourceEmissionsComponent implements OnInit {
       .subscribe((data) => (this.dataset = data));
   }
 
+  openMap(id: number) {
+    this.dialog.open(SourceEmissionMapComponent, {
+      width: '800px',
+      data: { id },
+    });
+  }
+
   defineGrid() {
     this.columnDefinitions = [
       {
@@ -173,7 +170,38 @@ export class SourceEmissionsComponent implements OnInit {
         filterable: true,
         sortable: true,
       },
+      {
+        id: 'map',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-map pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const id = args.dataContext.id;
+          this.openMap(id);
+        },
+      },
 
+      {
+        id: 'view',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-eye pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const id = args.dataContext.id;
+          this.openAreaDialog();
+          this.editForm(id);
+          this.form.disable();
+          this.viewMode = true;
+        },
+      },
       {
         id: 'edit',
         field: 'id',

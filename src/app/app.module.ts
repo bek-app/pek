@@ -67,6 +67,7 @@ import { AirCalcMethodComponent } from './components/reports/air-calc-method/air
 import { RadiationListComponent } from './components/reports/radiation-list/radiation-list.component';
 import { TboGazMonitoringComponent } from './components/reports/tbo-gaz-monitoring/tbo-gaz-monitoring.component';
 import { RadiationFormComponent } from './components/reports/radiation-list/radiation-form/radiation-form.component';
+import { SourceEmissionMapComponent } from './components/objects/source-emissions/source-emission-map/source-emission-map.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -131,6 +132,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     RadiationListComponent,
     TboGazMonitoringComponent,
     RadiationFormComponent,
+    SourceEmissionMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,5 +150,6 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [SourceEmissionMapComponent],
 })
 export class AppModule {}
