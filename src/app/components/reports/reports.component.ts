@@ -55,11 +55,11 @@ export class ReportsComponent implements OnInit {
       //   src: 'tbo-gaz-monitoring',
       //   name: ' Газовый мониторинг полигонов',
       // },
-      // {
-      //   index: 5,
-      //   src: 'labarotory-list',
-      //   name: 'Производственный мониторинг',
-      // },
+      {
+        index: 5,
+        src: 'labarotory-list',
+        name: 'Производственный мониторинг',
+      },
       // { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
       // {
       //   index: 7,

@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="primary" (click)="openFormDialog()">
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
+  </button>
+  <h2>{{ "LABAROTORY.TITLE" | translate }}</h2>
+</div>
+
+<div class="angular-slickgrid">
+  <angular-slickgrid
+    gridId="labarotory"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [dataset]="dataset"
+    (onClick)="
+      onCellClicked($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>

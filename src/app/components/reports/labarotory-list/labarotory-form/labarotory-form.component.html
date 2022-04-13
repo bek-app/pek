@@ -1,0 +1,141 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 mat-dialog-title>
+      {{ "LABAROTORY.TITLE" | translate }}
+    </h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "LABAROTORY.FORM.BIN" | translate }}
+        </mat-label>
+
+        <input
+          matInput
+          formControlName="bin"
+          type="text"
+          mask="separator"
+          maxlength="15"
+        />
+        <mat-error
+          *ngIf="
+          (f['bin'].touched || submitted) &&
+          f['bin'].errors?.['required']
+        "
+        >
+          {{ "ERROR" | translate }}
+        </mat-error>
+        <mat-error
+          *ngIf="
+          (f['bin'].touched || submitted) &&
+          f['bin'].errors?.['pattern']
+        "
+        >
+          {{ "LABAROTORY.VALIDATION.BIN_PATTERN" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> {{ "LABAROTORY.FORM.ORG_NAME" | translate }} </mat-label>
+
+        <input matInput formControlName="orgName" type="text" />
+        <mat-error
+          *ngIf="
+            (f['orgName'].touched || submitted) &&
+            f['orgName'].errors?.['required']
+          "
+        >
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label> {{ "LABAROTORY.FORM.REG_NUMBER" | translate }} </mat-label>
+
+        <input matInput formControlName="regNumber" type="text" />
+        <mat-error
+          *ngIf="
+            (f['regNumber'].touched || submitted) &&
+            f['regNumber'].errors?.['required']
+          "
+        >
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label> {{ "LABAROTORY.FORM.BEGIN_DATE" | translate }} </mat-label>
+
+        <input
+          matInput
+          formControlName="beginDate"
+          [matDatepicker]="beginDate"
+        />
+
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="beginDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #beginDate></mat-datepicker>
+
+        <mat-error
+          *ngIf="
+            (f['beginDate'].touched || submitted) &&
+            f['beginDate'].errors?.['required']
+          "
+        >
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> {{ "LABAROTORY.FORM.END_DATE" | translate }} </mat-label>
+
+        <input matInput formControlName="endDate" [matDatepicker]="endDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error
+          *ngIf="
+            (f['endDate'].touched || submitted) &&
+            f['endDate'].errors?.['required']
+          "
+        >
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label> {{ "LABAROTORY.FORM.KIND_ACTIVITY" | translate }}</mat-label>
+
+      <textarea
+        matInput
+        formControlName="kindActitvity"
+        type="text"
+        rows="5"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

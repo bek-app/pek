@@ -13,6 +13,7 @@ import { WasteWaterComponent } from './components/objects/waste-water/waste-wate
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { AccumulationWasteComponent } from './components/reports/accumulation-waste/accumulation-waste.component';
 import { BurialWasteComponent } from './components/reports/burial-waste/burial-waste.component';
+import { LabarotoryListComponent } from './components/reports/labarotory-list/labarotory-list.component';
 import { OperationWasteComponent } from './components/reports/operation-waste/operation-waste.component';
 import { ReceivingWasteComponent } from './components/reports/receiving-waste/receiving-waste.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -80,6 +81,10 @@ const routes: Routes = [
           { path: 'burial-waste', component: BurialWasteComponent },
           { path: 'operation-waste', component: OperationWasteComponent },
           { path: 'receiving-waste', component: ReceivingWasteComponent },
+          {
+            path: 'labarotory-list',
+            component: LabarotoryListComponent,
+          },
         ],
       },
     ],
