@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -25,7 +25,7 @@ export class ReceivingWasteComponent implements OnInit {
   gridObj: any;
   dataViewObj: any;
   reportId!: number;
-  receivingWasteId!: number;
+ receivingWasteId!: number;
   recevingWasteFormRef: any;
 
   angularGridReady(angularGrid: AngularGridInstance) {

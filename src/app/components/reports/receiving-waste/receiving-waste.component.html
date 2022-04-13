@@ -71,7 +71,11 @@
 
   <mat-tab label="Организации, которому передан оставшиеся объем отходов">
     <ng-template matTabContent>
-      <div class="container"></div>
+      <div class="container">
+        <app-waste-remaining
+          [receivingWasteId]="receivingWasteId"
+        ></app-waste-remaining>
+      </div>
     </ng-template>
   </mat-tab>
 </mat-tab-group>
