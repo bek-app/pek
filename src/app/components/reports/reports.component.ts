@@ -50,11 +50,11 @@ export class ReportsComponent implements OnInit {
         src: 'receiving-waste',
         name: 'Прием отходов',
       },
-      // {
-      //   index: 4,
-      //   src: 'tbo-gaz-monitoring',
-      //   name: ' Газовый мониторинг полигонов',
-      // },
+      {
+        index: 4,
+        src: 'tbo-gaz-monitoring',
+        name: ' Газовый мониторинг полигонов',
+      },
       {
         index: 5,
         src: 'labarotory-list',

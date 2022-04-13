@@ -17,8 +17,10 @@ import { AirCalcMethodComponent } from './components/reports/air-calc-method/air
 import { BurialWasteComponent } from './components/reports/burial-waste/burial-waste.component';
 import { LabarotoryListComponent } from './components/reports/labarotory-list/labarotory-list.component';
 import { OperationWasteComponent } from './components/reports/operation-waste/operation-waste.component';
+import { RadiationListComponent } from './components/reports/radiation-list/radiation-list.component';
 import { ReceivingWasteComponent } from './components/reports/receiving-waste/receiving-waste.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { TboGazMonitoringComponent } from './components/reports/tbo-gaz-monitoring/tbo-gaz-monitoring.component';
 import { CommonComponent } from './layouts/common/common.component';
 
 const routes: Routes = [
@@ -94,6 +96,14 @@ const routes: Routes = [
           {
             path: 'air-calc-method',
             component: AirCalcMethodComponent,
+          },
+          {
+            path: 'radiation-list',
+            component: RadiationListComponent,
+          },
+          {
+            path: 'tbo-gaz-monitoring',
+            component: TboGazMonitoringComponent,
           },
         ],
       },

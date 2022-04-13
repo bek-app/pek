@@ -1,0 +1,90 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="dialog__title">
+    <h2 matDialogTitle>{{ "RADIATION.TITLE" | translate }}</h2>
+    <span mat-dialog-close> <mat-icon class="mat-18">close</mat-icon></span>
+  </div>
+
+  <mat-dialog-content>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label> {{ "RADIATION.FORM.SOURCE_NAME" | translate }} </mat-label>
+        <input type="text" matInput formControlName="sourceName" />
+        <mat-error>
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          {{ "RADIATION.FORM.STANDARD_LIMIT" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="standartLimit" />
+        <mat-error>
+          {{ "ERROR" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "RADIATION.FORM.ACTUAL_VOLUME" | translate }}
+      </mat-label>
+      <input type="number" matInput formControlName="actualVolume" />
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>
+          {{ "RADIATION.FORM.EXCEEDING_VOLUME" | translate }}
+        </mat-label>
+        <input type="number" matInput formControlName="exceedingVolume" />
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label
+          >{{ "RADIATION.FORM.ELIMINATION_DEADLINE" | translate }}
+        </mat-label>
+
+        <input
+          matInput
+          formControlName="eliminationDeadline"
+          [matDatepicker]="eliminationDeadline"
+        />
+
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="eliminationDeadline"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #eliminationDeadline></mat-datepicker>
+
+        <mat-error>{{ "ERROR" | translate }} </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>
+        {{ "RADIATION.FORM.CORRECTIVE_MEASURES" | translate }}
+      </mat-label>
+      <textarea
+        formControlName="correctiveMeasures"
+        matInput
+        rows="5"
+      ></textarea>
+      <mat-error>{{ "ERROR" | translate }} </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    *ngIf="!viewMode"
+  >
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ "SAVE" | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -64,6 +64,9 @@ import { LabarotoryListComponent } from './components/reports/labarotory-list/la
 import { LabarotoryFormComponent } from './components/reports/labarotory-list/labarotory-form/labarotory-form.component';
 import { AirAreaListComponent } from './components/reports/air-area-list/air-area-list.component';
 import { AirCalcMethodComponent } from './components/reports/air-calc-method/air-calc-method.component';
+import { RadiationListComponent } from './components/reports/radiation-list/radiation-list.component';
+import { TboGazMonitoringComponent } from './components/reports/tbo-gaz-monitoring/tbo-gaz-monitoring.component';
+import { RadiationFormComponent } from './components/reports/radiation-list/radiation-form/radiation-form.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -125,6 +128,9 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     LabarotoryFormComponent,
     AirAreaListComponent,
     AirCalcMethodComponent,
+    RadiationListComponent,
+    TboGazMonitoringComponent,
+    RadiationFormComponent,
   ],
   imports: [
     BrowserModule,
