@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AirMeasureMethodModel } from '@models/air-measure-method.model';
-
+import { AirMeasureMethodModel } from '@models/reports/air/air-measure-method.model';
+ 
 @Injectable({
   providedIn: 'root',
 })

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AirAreaModel } from '@models/air-area.model';
+import { AirAreaModel } from '@models/reports/air/air-area.model';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({

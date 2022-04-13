@@ -60,7 +60,7 @@ export class ReportsComponent implements OnInit {
         src: 'labarotory-list',
         name: 'Производственный мониторинг',
       },
-      // { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
+      { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
       // {
       //   index: 7,
       //   src: 'air-calc-method',

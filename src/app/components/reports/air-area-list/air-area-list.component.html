@@ -1,0 +1,13 @@
+<div class="col">
+  <angular-slickgrid
+    gridId="air-measure-method"
+    [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions"
+    [datasetHierarchical]="dataset"
+    (onCellChange)="
+      onCellChanged($any($event).detail.eventData, $any($event).detail.args)
+    "
+    (onAngularGridCreated)="angularGridReady($any($event).detail)"
+  >
+  </angular-slickgrid>
+</div>

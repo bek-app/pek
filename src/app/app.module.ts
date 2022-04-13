@@ -62,6 +62,7 @@ import { WasteRemainingComponent } from './components/reports/receiving-waste/wa
 import { WasteRemainingFormComponent } from './components/reports/receiving-waste/waste-remaining/waste-remaining-form/waste-remaining-form.component';
 import { LabarotoryListComponent } from './components/reports/labarotory-list/labarotory-list.component';
 import { LabarotoryFormComponent } from './components/reports/labarotory-list/labarotory-form/labarotory-form.component';
+import { AirAreaListComponent } from './components/reports/air-area-list/air-area-list.component';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -121,6 +122,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     WasteRemainingFormComponent,
     LabarotoryListComponent,
     LabarotoryFormComponent,
+    AirAreaListComponent,
   ],
   imports: [
     BrowserModule,
