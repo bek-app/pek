@@ -2,6 +2,7 @@
 @import "~@angular/material/theming";
 @import "~@ng-matero/extensions/theming";
 @include mat-core();
+@import "~@mdi/font/css/materialdesignicons.css";
 
 $primary: mat-palette($mat-blue-grey, 700);
 $accent: mat-palette($mat-deep-orange, 500, A100, A400);
@@ -17,7 +18,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
   color: mat-color($accent, darker) !important;
   background: rgba(0, 0, 0, 0.04);
 }
- 
+
 html,
 body {
   height: 100%;

@@ -149,7 +149,7 @@ export class SourceEmissionsComponent implements OnInit {
 
   openMap(id: number) {
     this.dialog.open(SourceEmissionMapComponent, {
-      width: '800px',
+
       data: { id },
     });
   }

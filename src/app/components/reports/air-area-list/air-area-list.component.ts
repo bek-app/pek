@@ -12,6 +12,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { AirMeasureMethodService } from '@services/reports/air/air-measure-method.service';
 import { AirMeasureMethodModel } from '@models/reports/air/air-measure-method.model';
+import { AirAreaService } from '@services/reports/air/air-area.service';
 @Component({
   selector: 'app-air-area-list',
   templateUrl: './air-area-list.component.html',
@@ -52,7 +53,8 @@ export class AirAreaListComponent implements OnInit {
 
   constructor(
     private airMeasureMethodService: AirMeasureMethodService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private airAreaService: AirAreaService
   ) {
     this.route.params.subscribe((param) => {
       this.reportId = +param['id'];
