@@ -23,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GasMonitoringFormComponent } from './gas-monitoring-form/gas-monitoring-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-gas-monitoring',
   templateUrl: './gas-monitoring.component.html',
@@ -47,8 +48,14 @@ export class GasMonitoringComponent implements OnInit {
   constructor(
     private gasMonitoringService: GasMonitoringService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
-  ) {
+    private dialog: MatDialog,
+    private sharedService: SharedService
+    ) {
+      this.sharedService.currentSource.subscribe(() => {
+        setTimeout(() => {
+          this.angularGrid.resizerService.resizeGrid();
+        }, 100);
+      });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });

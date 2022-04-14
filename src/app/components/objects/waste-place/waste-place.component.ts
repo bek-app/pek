@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WastePlaceFormComponent } from './waste-place-form/waste-place-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-waste-place',
   templateUrl: './waste-place.component.html',
@@ -38,8 +39,14 @@ export class WastePlaceComponent implements OnInit {
   constructor(
     private wsPlaceService: WastePlaceService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sharedService: SharedService
   ) {
+    this.sharedService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.angularGrid.resizerService.resizeGrid();
+      }, 100);
+    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });

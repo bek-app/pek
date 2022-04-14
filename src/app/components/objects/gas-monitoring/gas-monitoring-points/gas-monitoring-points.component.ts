@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { GazMonitoringPointModel } from '@models/objects/gas-monitoring/gas-monitoring.model';
 import { GasMonitoringService } from '@services/objects/gas-monitoring/gas-monitoring.service';
+import { SharedService } from '@services/shared.service';
 import {
   Column,
   GridOption,
@@ -43,8 +44,15 @@ export class GasMonitoringPointsComponent implements OnInit, OnChanges {
 
   constructor(
     private gasMonitoringService: GasMonitoringService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private sharedService: SharedService
+  ) {
+    this.sharedService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.angularGrid.resizerService.resizeGrid();
+      }, 100);
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { currentValue } = changes['gasMonitoringId'];

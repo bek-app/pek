@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WasteWaterFormComponent } from './waste-water-form/waste-water-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-waste-water',
   templateUrl: './waste-water.component.html',
@@ -39,8 +40,14 @@ export class WasteWaterComponent implements OnInit {
   constructor(
     private wsWaterService: WasteWaterService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sharedService: SharedService
   ) {
+    this.sharedService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.angularGrid.resizerService.resizeGrid();
+      }, 100);
+    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });

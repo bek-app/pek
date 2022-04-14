@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BurialPlaceService } from '@services/objects/burial-place/burial-place.service';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
+import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-burial-place',
   templateUrl: './burial-place.component.html',
@@ -37,8 +38,14 @@ export class BurialPlaceComponent implements OnInit {
   constructor(
     private burialPlaceService: BurialPlaceService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sharedService: SharedService
   ) {
+    this.sharedService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.angularGrid.resizerService.resizeGrid();
+      }, 100);
+    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });

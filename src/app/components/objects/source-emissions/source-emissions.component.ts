@@ -27,12 +27,14 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { InstrumentalMeasurementComponent } from './instrumental-measurement/instrumental-measurement.component';
 import { InstrumentalMeasurementFormComponent } from './instrumental-measurement/instrumental-measurement-form/instrumental-measurement-form.component';
 import { SourceEmissionMapComponent } from './source-emission-map/source-emission-map.component';
+import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-source-emissions',
   templateUrl: './source-emissions.component.html',
   styleUrls: ['./source-emissions.component.scss'],
 })
 export class SourceEmissionsComponent implements OnInit {
+  [x: string]: any;
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
@@ -50,20 +52,30 @@ export class SourceEmissionsComponent implements OnInit {
   viewMode = false;
   @ViewChild('areaForm') areaForm!: TemplateRef<any>;
   formDialogRef!: any;
+
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
     this.dataViewObj = angularGrid.dataView;
+    console.log(this.angularGrid);
   }
+
   constructor(
     private sourceEmissionsService: SourceEmissionsService,
     public fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sharedService: SharedService
   ) {
     this.form = this.fb.group({
       areaName: new FormControl('', [Validators.required]),
+    });
+
+    this.sharedService.currentSource.subscribe(() => {
+      setTimeout(() => {
+        this.angularGrid.resizerService.resizeGrid();
+      }, 100);
     });
   }
 
@@ -106,12 +118,6 @@ export class SourceEmissionsComponent implements OnInit {
     this.areaId = item.id;
   }
 
-  onActivate(componentReference: any) {
-    if (this.areaId) {
-      componentReference.goToEmissions(this.areaId);
-    }
-  }
-
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) {
@@ -149,7 +155,6 @@ export class SourceEmissionsComponent implements OnInit {
 
   openMap(id: number) {
     this.dialog.open(SourceEmissionMapComponent, {
-
       data: { id },
     });
   }
@@ -238,9 +243,11 @@ export class SourceEmissionsComponent implements OnInit {
     ];
 
     this.gridOptions = {
-      gridWidth: '100%',
       gridHeight: 200,
+
+      leaveSpaceForNewRows: true,
       rowHeight: 35,
+      forceFitColumns: false,
       enableCheckboxSelector: true,
       enableRowSelection: true,
       rowSelectionOptions: {

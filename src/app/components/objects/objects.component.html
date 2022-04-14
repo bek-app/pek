@@ -15,21 +15,8 @@
   </div>
 </div>
 
-<!-- <nav mat-tab-nav-bar backgroundColor="primary">
-  <a
-    mat-tab-link
-    *ngFor="let objRoute of objectsRoute"
-    [routerLink]="objRoute.src"
-    routerLinkActive
-    #rla="routerLinkActive"
-    [active]="rla.isActive"
-  >
-    {{ objRoute.name }}
-  </a>
-</nav>
-<router-outlet></router-outlet> -->
 <hr />
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
   <mat-sidenav
     opened
     mode="side"
@@ -46,6 +33,37 @@
       >
         {{ objRoute.name }}</a
       >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="object-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-icon-button (click)="toggleSidebar()" class="btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <mat-list-item
+        mat-list-item
+        [routerLink]="objRoute.src"
+        *ngFor="let objRoute of objectsRoute"
+        [routerLinkActive]="['is-active']"
+      >
+        <span *ngIf="isExpanded"> {{ objRoute.name }}</span>
+
+        <mat-icon mat-list-icon>{{ objRoute.icon }}</mat-icon>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 
