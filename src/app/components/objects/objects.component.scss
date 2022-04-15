@@ -1,3 +1,15 @@
 .object-menu {
   box-shadow: 1px 4px 57px -7px rgba(5, 5, 6, 0.23);
 }
+.header-objects {
+  background-color: #353f53;
+  padding: 0 1.25rem;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-top: 1px solid #009688;
+}

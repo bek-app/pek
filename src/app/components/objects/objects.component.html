@@ -1,21 +1,9 @@
-<div
-  class="row d-flex justify-content-between mb-3"
-  *ngFor="let obj of pekObjects"
->
-  <div class="col">
-    <div class="alert alert-success">
-      <nav aria-label="breadcrumb ">
-        <ol class="breadcrumb m-0">
-          <li class="breadcrumb-item">{{ obj?.nameObject }}</li>
-          <li class="breadcrumb-item">{{ obj?.oblastName }}</li>
-          <li class="breadcrumb-item">{{ obj?.regionName }}</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+<div class="header-objects" *ngFor="let obj of pekObjects">
+  <div class="">{{ obj?.nameObject }}</div>
+  <div class="">{{ obj?.oblastName }}</div>
+  <div class="">{{ obj?.regionName }}</div>
 </div>
 
-<hr />
 <!-- <mat-sidenav-container>
   <mat-sidenav
     opened
@@ -83,7 +71,7 @@
     (mouseenter)="increase()"
     (mouseleave)="decrease()"
     [fixedInViewport]="true"
-    fixedTopGap="160"
+    fixedTopGap="170"
     class="object-menu"
   >
     <mat-nav-list>
