@@ -12,6 +12,9 @@ export class ReportsComponent implements OnInit {
   report: any;
   reportRoute: any[] = [];
   activeLinkIndex = -1;
+  sidenavWidth = 4;
+  ngStyle!: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -20,6 +23,14 @@ export class ReportsComponent implements OnInit {
     this.route.params.subscribe((param: Params) => {
       this.reportId = +param['id'];
     });
+  }
+
+  increase() {
+    this.sidenavWidth = 32;
+  }
+
+  decrease() {
+    this.sidenavWidth = 4;
   }
 
   ngOnInit(): void {

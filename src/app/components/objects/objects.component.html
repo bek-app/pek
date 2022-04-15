@@ -43,7 +43,7 @@
   </mat-sidenav-content>
 </mat-sidenav-container> -->
 
-<mat-sidenav-container autosize>
+<!-- <mat-sidenav-container autosize>
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
       <mat-list-item>
@@ -63,6 +63,40 @@
         <span *ngIf="isExpanded"> {{ objRoute.name }}</span>
 
         <mat-icon mat-list-icon>{{ objRoute.icon }}</mat-icon>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="object-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [ngStyle]="{ 'width.em': sidenavWidth }"
+    opened="true"
+    (mouseenter)="increase()"
+    (mouseleave)="decrease()"
+    [fixedInViewport]="true"
+    fixedTopGap="160"
+    class="object-menu"
+  >
+    <mat-nav-list>
+      <mat-list-item
+        [routerLink]="objRoute.src"
+        *ngFor="let objRoute of objectsRoute"
+        [routerLinkActive]="['is-active']"
+      >
+        <mat-icon mat-list-icon>{{ objRoute.icon }}</mat-icon>
+        <div fxFlex="5"></div>
+        <div *ngIf="sidenavWidth > 6">
+          {{ objRoute.name }}
+        </div>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>

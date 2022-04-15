@@ -18,7 +18,8 @@ export class ObjectsComponent implements OnInit {
   activeLinkIndex = -1;
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
-
+  sidenavWidth = 4;
+  ngStyle!: string;
   constructor(
     private route: ActivatedRoute,
     protected translate: TranslateService,
@@ -80,12 +81,20 @@ export class ObjectsComponent implements OnInit {
       );
   }
 
-  toggleSidebar() {
-    this.isExpanded = !this.isExpanded;
-    console.log(this.isExpanded);
-
-    this.sharedService.send(this.isExpanded);
+  increase() {
+    this.sidenavWidth = 32;
   }
+
+  decrease() {
+    this.sidenavWidth = 4;
+  }
+
+  // toggleSidebar() {
+  //   this.isExpanded = !this.isExpanded;
+  //   console.log(this.isExpanded);
+
+  //   this.sharedService.send(this.isExpanded);
+  // }
 
   ngOnInit(): void {
     this.router.events.subscribe(() => {

@@ -17,7 +17,8 @@
   </button>
 </div>
 <hr />
-<mat-sidenav-container>
+
+<!-- <mat-sidenav-container>
   <mat-sidenav opened mode="side" [fixedInViewport]="false" class="report-menu">
     <mat-nav-list>
       <a
@@ -28,6 +29,45 @@
       >
         {{ rep.name }}</a
       >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="report-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [ngStyle]="{ 'width.em': sidenavWidth }"
+    opened="true"
+    (mouseenter)="increase()"
+    (mouseleave)="decrease()"
+    [fixedInViewport]="true"
+    fixedTopGap="175"
+    class="report-menu"
+  >
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon>format_list_bulleted </mat-icon>
+      </mat-list-item>
+
+      <mat-list-item
+        *ngFor="let rep of reportRoute"
+        [routerLink]="rep.src"
+        [routerLinkActive]="['is-active']"
+      >
+        <mat-icon> bookmark_border </mat-icon>
+
+        <div fxFlex="5"></div>
+        <div *ngIf="sidenavWidth > 6">
+          {{ rep.name }}
+        </div>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 
