@@ -10,10 +10,48 @@ import { ReportService } from '@services/reports/report.service';
 export class ReportsComponent implements OnInit {
   reportId!: number;
   report: any;
-  reportRoute: any[] = [];
+  isExpanded = false;
+  reportRoute: any[] = [
+    {
+      index: 0,
+      src: 'accumulation-waste',
+      name: 'Накоплению отходов',
+    },
+    {
+      index: 1,
+      src: 'operation-waste',
+      name: ' Операция на отходов',
+    },
+    { index: 2, src: 'burial-waste', name: 'Захоронению отходов' },
+    {
+      index: 3,
+      src: 'receiving-waste',
+      name: 'Прием отходов',
+    },
+    // {
+    //   index: 4,
+    //   src: 'tbo-gaz-monitoring',
+    //   name: ' Газовый мониторинг полигонов',
+    // },
+    {
+      index: 5,
+      src: 'labarotory-list',
+      name: 'Производственный мониторинг',
+    },
+    { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
+    {
+      index: 7,
+      src: 'air-calc-method',
+      name: 'Результаты на основе расчетов ',
+    },
+    {
+      index: 8,
+      src: 'radiation-list',
+      name: 'Сведения по радиационному мониторингу',
+    },
+  ];
+
   activeLinkIndex = -1;
-  sidenavWidth = 4;
-  ngStyle!: string;
 
   constructor(
     private router: Router,
@@ -25,13 +63,7 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  increase() {
-    this.sidenavWidth = 32;
-  }
 
-  decrease() {
-    this.sidenavWidth = 4;
-  }
 
   ngOnInit(): void {
     this.reportService.getReport(this.reportId).subscribe((data) => {
@@ -43,46 +75,6 @@ export class ReportsComponent implements OnInit {
         this.reportRoute.find((report) => report.src === '.' + this.router.url)
       );
     });
-
-    this.reportRoute = [
-      {
-        index: 0,
-        src: 'accumulation-waste',
-        name: 'Накоплению отходов',
-      },
-      {
-        index: 1,
-        src: 'operation-waste',
-        name: ' Операция на отходов',
-      },
-      { index: 2, src: 'burial-waste', name: 'Захоронению отходов' },
-      {
-        index: 3,
-        src: 'receiving-waste',
-        name: 'Прием отходов',
-      },
-      {
-        index: 4,
-        src: 'tbo-gaz-monitoring',
-        name: ' Газовый мониторинг полигонов',
-      },
-      {
-        index: 5,
-        src: 'labarotory-list',
-        name: 'Производственный мониторинг',
-      },
-      { index: 6, src: 'air-area-list', name: 'Атмосферный воздух' },
-      {
-        index: 7,
-        src: 'air-calc-method',
-        name: 'Результаты на основе расчетов ',
-      },
-      {
-        index: 8,
-        src: 'radiation-list',
-        name: 'Сведения по радиационному мониторингу',
-      },
-    ];
   }
 
   send() {
@@ -91,5 +83,14 @@ export class ReportsComponent implements OnInit {
         this.router.navigate(['/report-list']);
       });
     }
+  }
+
+
+  increase() {
+    this.isExpanded = true;
+  }
+
+  decrease() {
+    this.isExpanded = false;
   }
 }

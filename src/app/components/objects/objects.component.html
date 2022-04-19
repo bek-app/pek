@@ -4,86 +4,25 @@
   <div class="">{{ obj?.regionName }}</div>
 </div>
 
-<!-- <mat-sidenav-container>
-  <mat-sidenav
-    opened
-    mode="side"
-    [fixedInViewport]="true"
-    [fixedTopGap]="170"
-    class="object-menu"
-  >
-    <mat-nav-list>
-      <a
-        mat-list-item
-        [routerLink]="objRoute.src"
-        *ngFor="let objRoute of objectsRoute"
-        [routerLinkActive]="['is-active']"
-      >
-        {{ objRoute.name }}</a
-      >
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="object-content">
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
-
-<!-- <mat-sidenav-container autosize>
-  <mat-sidenav #sidenav mode="side" opened="true">
-    <mat-nav-list>
-      <mat-list-item>
-        <button mat-icon-button (click)="toggleSidebar()" class="btn">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-nav-list>
-
-    <mat-nav-list>
-      <mat-list-item
-        mat-list-item
-        [routerLink]="objRoute.src"
-        *ngFor="let objRoute of objectsRoute"
-        [routerLinkActive]="['is-active']"
-      >
-        <span *ngIf="isExpanded"> {{ objRoute.name }}</span>
-
-        <mat-icon mat-list-icon>{{ objRoute.icon }}</mat-icon>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="object-content">
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
-
 <mat-sidenav-container>
   <mat-sidenav
     #sidenav
     mode="side"
-    [ngStyle]="{ 'width.em': sidenavWidth }"
     opened="true"
     (mouseenter)="increase()"
     (mouseleave)="decrease()"
-    [fixedInViewport]="true"
-    fixedTopGap="170"
     class="object-menu"
   >
     <mat-nav-list>
       <mat-list-item
-        [routerLink]="objRoute.src"
-        *ngFor="let objRoute of objectsRoute"
+        *ngFor="let obj of objectsRoute"
+        [routerLink]="obj.src"
         [routerLinkActive]="['is-active']"
       >
-        <mat-icon mat-list-icon>{{ objRoute.icon }}</mat-icon>
+        <mat-icon mat-list-icon>{{ obj.icon }}</mat-icon>
         <div fxFlex="5"></div>
-        <div *ngIf="sidenavWidth > 6">
-          {{ objRoute.name }}
+        <div *ngIf="isExpanded">
+          {{ obj.name }}
         </div>
       </mat-list-item>
     </mat-nav-list>

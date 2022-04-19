@@ -43,12 +43,9 @@
   <mat-sidenav
     #sidenav
     mode="side"
-    [ngStyle]="{ 'width.em': sidenavWidth }"
     opened="true"
     (mouseenter)="increase()"
     (mouseleave)="decrease()"
-    [fixedInViewport]="true"
-    fixedTopGap="175"
     class="report-menu"
   >
     <mat-nav-list>
@@ -64,7 +61,7 @@
         <mat-icon> bookmark_border </mat-icon>
 
         <div fxFlex="5"></div>
-        <div *ngIf="sidenavWidth > 6">
+        <div *ngIf="isExpanded">
           {{ rep.name }}
         </div>
       </mat-list-item>

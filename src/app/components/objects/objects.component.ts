@@ -16,85 +16,54 @@ export class ObjectsComponent implements OnInit {
   objectId!: number;
   objectsRoute: any[] = [];
   activeLinkIndex = -1;
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
-  sidenavWidth = 4;
-  ngStyle!: string;
+  isExpanded = false;
   constructor(
     private route: ActivatedRoute,
     protected translate: TranslateService,
     private objService: ObjectsService,
-    private router: Router,
-    private sharedService: SharedService
+    private router: Router
   ) {
-    this.translate
-      .get('OBJECTS_MENU')
-      .subscribe(
-        (data: {
-          SOURCE_EMISSION: string;
-          GAS_MONITORING: string;
-          WASTE_WATER: string;
-          WASTE_PLACE: string;
-          BURIAL_PLACE: string;
-        }) => {
-          const {
-            SOURCE_EMISSION,
-            GAS_MONITORING,
-            WASTE_WATER,
-            WASTE_PLACE,
-            BURIAL_PLACE,
-          } = data;
+    const {
+      SOURCE_EMISSION,
+      GAS_MONITORING,
+      WASTE_WATER,
+      WASTE_PLACE,
+      BURIAL_PLACE,
+    } = this.translate.instant('OBJECTS_MENU');
 
-          this.objectsRoute = [
-            {
-              src: './source-emissions',
-              name: SOURCE_EMISSION,
-              index: 0,
-              icon: 'source',
-            },
-            {
-              src: './gas-monitoring',
-              name: GAS_MONITORING,
-              index: 1,
-              icon: 'monitoring',
-            },
-            {
-              src: './waste-water',
-              name: WASTE_WATER,
-              index: 2,
-              icon: 'water',
-            },
-            {
-              src: './waste-place',
-              name: WASTE_PLACE,
-              index: 3,
-              icon: 'place',
-            },
-            {
-              src: './burial-place',
-              name: BURIAL_PLACE,
-              index: 4,
-              icon: 'place',
-            },
-          ];
-        }
-      );
+    this.objectsRoute = [
+      {
+        src: './source-emissions',
+        name: SOURCE_EMISSION,
+        index: 0,
+        icon: 'source',
+      },
+      {
+        src: './gas-monitoring',
+        name: GAS_MONITORING,
+        index: 1,
+        icon: 'monitoring',
+      },
+      {
+        src: './waste-water',
+        name: WASTE_WATER,
+        index: 2,
+        icon: 'water',
+      },
+      {
+        src: './waste-place',
+        name: WASTE_PLACE,
+        index: 3,
+        icon: 'place',
+      },
+      {
+        src: './burial-place',
+        name: BURIAL_PLACE,
+        index: 4,
+        icon: 'place',
+      },
+    ];
   }
-
-  increase() {
-    this.sidenavWidth = 32;
-  }
-
-  decrease() {
-    this.sidenavWidth = 4;
-  }
-
-  // toggleSidebar() {
-  //   this.isExpanded = !this.isExpanded;
-  //   console.log(this.isExpanded);
-
-  //   this.sharedService.send(this.isExpanded);
-  // }
 
   ngOnInit(): void {
     this.router.events.subscribe(() => {
@@ -112,7 +81,13 @@ export class ObjectsComponent implements OnInit {
         this.pekObjects.push(data);
       },
     });
+  }
 
-    this.translate.instant('OBJECTS_MENU');
+  increase() {
+    this.isExpanded = true;
+  }
+
+  decrease() {
+    this.isExpanded = false;
   }
 }

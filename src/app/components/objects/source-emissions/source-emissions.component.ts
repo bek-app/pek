@@ -66,16 +66,9 @@ export class SourceEmissionsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private sharedService: SharedService
-  ) {
+   ) {
     this.form = this.fb.group({
       areaName: new FormControl('', [Validators.required]),
-    });
-
-    this.sharedService.currentSource.subscribe(() => {
-      setTimeout(() => {
-        this.angularGrid.resizerService.resizeGrid();
-      }, 100);
     });
   }
 

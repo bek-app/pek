@@ -27,7 +27,6 @@ import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { PollutantsFormComponent } from '../pollutants-form/pollutants-form.component';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 import { CalculationMethodFormComponent } from './calculation-method-form/calculation-method-form.component';
-import { SharedService } from '@services/shared.service';
 @Component({
   selector: 'app-calculation-method',
   templateUrl: './calculation-method.component.html',
@@ -56,15 +55,8 @@ export class CalculationMethodComponent implements OnInit {
   constructor(
     private sourceEmissionService: SourceEmissionsService,
     private sourceEmissionPollutantsService: SourceEmissionPollutantService,
-    private dialog: MatDialog,
-    private sharedService: SharedService
-  ) {
-    this.sharedService.currentSource.subscribe(() => {
-      setTimeout(() => {
-        this.angularGrid.resizerService.resizeGrid();
-      }, 100);
-    });
-  }
+    private dialog: MatDialog
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     const { currentValue } = changes['areaId'];

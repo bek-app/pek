@@ -63,7 +63,10 @@ export class ObjectListComponent implements OnInit {
     this.objectFormRef.componentInstance.objectCreated.subscribe({
       next: (data: ObjectModel) => {
         this.objectsService.addObject(data).subscribe({
-          next: () => this.objectFormRef.close(),
+          next: () => {
+            this.objectFormRef.close();
+            this.refreshList();
+          },
         });
       },
     });
@@ -76,7 +79,8 @@ export class ObjectListComponent implements OnInit {
           .updateObject({ id: this.objectId, ...data })
           .subscribe({
             next: () => {
-              this.objectFormRef.close(), this.refreshList();
+              this.objectFormRef.close();
+              this.refreshList();
             },
           });
       },
@@ -228,11 +232,6 @@ export class ObjectListComponent implements OnInit {
     this.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
-      enablePagination: false,
-      pagination: {
-        pageSizes: [5, 10, 20, 25, 50],
-        pageSize: 20,
-      },
     };
   }
 }
