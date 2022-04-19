@@ -1,10 +1,6 @@
-<div
-  class="gas-monitoring-points-header"
-  fxLayout="row"
-  fxLayoutAlign="space-between end"
->
+<div fxLayout="row" fxLayoutAlign="space-between end">
   <button mat-raised-button color="primary" (click)="openPointsDialog()">
-    {{ "CREATE" | translate }}
+    <mat-icon class="mat-18">add</mat-icon> {{ "CREATE" | translate }}
   </button>
   <h2>{{ "GAS_MONITORING.CONTROL_POINT.TITLE" | translate }}</h2>
 </div>

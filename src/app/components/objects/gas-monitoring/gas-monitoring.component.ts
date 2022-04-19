@@ -17,13 +17,17 @@ import {
   Formatter,
 } from 'angular-slickgrid';
 import { ActivatedRoute, Params } from '@angular/router';
-import { GasMonitoringModel } from '@models/objects/gas-monitoring/gas-monitoring.model';
+import {
+  GasMonitoringModel,
+  GazMonitoringPointModel,
+} from '@models/objects/gas-monitoring/gas-monitoring.model';
 import { GasMonitoringService } from '@services/objects/gas-monitoring/gas-monitoring.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GasMonitoringFormComponent } from './gas-monitoring-form/gas-monitoring-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { SharedService } from '@services/shared.service';
+import { ObjectMapComponent } from '../object-map/object-map.component';
 @Component({
   selector: 'app-gas-monitoring',
   templateUrl: './gas-monitoring.component.html',
@@ -48,14 +52,8 @@ export class GasMonitoringComponent implements OnInit {
   constructor(
     private gasMonitoringService: GasMonitoringService,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private sharedService: SharedService
-    ) {
-      this.sharedService.currentSource.subscribe(() => {
-        setTimeout(() => {
-          this.angularGrid.resizerService.resizeGrid();
-        }, 100);
-      });
+    private dialog: MatDialog
+  ) {
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });
@@ -126,6 +124,12 @@ export class GasMonitoringComponent implements OnInit {
     }
   }
 
+  openMap(data: GazMonitoringPointModel[]) {
+    this.dialog.open(ObjectMapComponent, {
+      data,
+    });
+  }
+
   defineGrid() {
     this.columnDefinitions = [
       {
@@ -141,6 +145,24 @@ export class GasMonitoringComponent implements OnInit {
         field: 'countPoint',
         filterable: true,
         sortable: true,
+      },
+      {
+        id: 'map',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-map pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const id = args.dataContext.id;
+          this.gasMonitoringService.getGazMonitoringPoints(id).subscribe({
+            next: (points) => {
+              this.openMap(points);
+            },
+          });
+        },
       },
       {
         id: 'view',
@@ -159,6 +181,7 @@ export class GasMonitoringComponent implements OnInit {
           this.gasMonitoringFormRef.componentInstance.editForm(id);
         },
       },
+
       {
         id: 'edit',
         field: 'id',

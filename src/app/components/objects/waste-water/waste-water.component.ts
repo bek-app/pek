@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WasteWaterFormComponent } from './waste-water-form/waste-water-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
-import { SharedService } from '@services/shared.service';
+import { ObjectMapComponent } from '../object-map/object-map.component';
 @Component({
   selector: 'app-waste-water',
   templateUrl: './waste-water.component.html',
@@ -26,7 +26,6 @@ export class WasteWaterComponent implements OnInit {
   dataset: WasteWaterModel[] = [];
   gridObj: any;
   dataViewObj: any;
-
   objectId!: number;
   wsWaterId!: number;
   wsWaterFormRef: any;
@@ -40,14 +39,8 @@ export class WasteWaterComponent implements OnInit {
   constructor(
     private wsWaterService: WasteWaterService,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private sharedService: SharedService
+    private dialog: MatDialog
   ) {
-    this.sharedService.currentSource.subscribe(() => {
-      setTimeout(() => {
-        this.angularGrid.resizerService.resizeGrid();
-      }, 100);
-    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });
@@ -108,6 +101,12 @@ export class WasteWaterComponent implements OnInit {
     });
   }
 
+  openMap(data: WasteWaterModel[]) {
+    this.dialog.open(ObjectMapComponent, {
+      data,
+    });
+  }
+
   defineGrid() {
     this.columnDefinitions = [
       {
@@ -142,6 +141,23 @@ export class WasteWaterComponent implements OnInit {
         id: 'wasteNames',
         name: 'Наименование загрязняющих веществ',
         field: 'wasteNames',
+      },
+
+      {
+        id: 'map',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-map pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const id = args.dataContext.id;
+          this.wsWaterService
+            .getWasteWater(id)
+            .subscribe((data) => this.openMap([data]));
+        },
       },
       {
         id: 'view',

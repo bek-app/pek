@@ -68,6 +68,18 @@ export class SourceEmissionMapComponent implements OnInit, AfterViewInit {
           });
         },
       });
+
+    this.sourceEmissionService
+      .getSourceEmissionList(this.areaId, 'calc')
+      .subscribe({
+        next: (values) => {
+          values.forEach((value) => {
+            const { lat, lng } = value;
+            const marker = L.marker([lat, lng]);
+            marker.addTo(map);
+          });
+        },
+      });
   }
 
   makeCapitalPopup(data: any): string {

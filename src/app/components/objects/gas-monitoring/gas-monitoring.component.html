@@ -1,20 +1,17 @@
-<div
-  class="gas-monitoring-header"
-  fxLayout="row"
-  fxLayoutAlign="space-between end"
->
+<div fxLayout="row" fxLayoutAlign="space-between end">
   <button
     mat-raised-button
     type="button"
     color="primary"
     (click)="openGasMonitoringForm()"
   >
+    <mat-icon class="mat-18">add</mat-icon>
     {{ "CREATE" | translate }}
   </button>
   <h2>{{ "GAS_MONITORING.POLYGON_NAME.TITLE" | translate }}</h2>
 </div>
 
-<div class="angular-slickgrid"  >
+<div class="angular-slickgrid">
   <angular-slickgrid
     gridId="polygon-naming"
     [columnDefinitions]="columnDefinitions"
