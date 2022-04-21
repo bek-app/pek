@@ -29,7 +29,8 @@ export class ObjectMapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.makeMarkers(this.map, this.data);
+    // this.makeMarkers(this.map, this.data);
+    this.makePolygons(this.map, this.data);
   }
 
   makeMarkers(map: L.Map, coords: any): void {
@@ -40,6 +41,14 @@ export class ObjectMapComponent implements OnInit, AfterViewInit {
     });
   }
 
+  makePolygons(map: L.Map, payload: any): void {
+    const { data } = payload;
+
+    data.forEach((items: any) => {
+      const polygon = new L.Polygon(items.coords);
+      polygon.addTo(map);
+    });
+  }
   private initMap(): void {
     this.map = L.map('map', {
       center: [51.13, 71.42],

@@ -13,7 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { WastePlaceFormComponent } from './waste-place-form/waste-place-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
-import { SharedService } from '@services/shared.service';
+import { SourceEmissionMapComponent } from '../source-emissions/source-emission-map/source-emission-map.component';
+import { ObjectMapComponent } from '../object-map/object-map.component';
 @Component({
   selector: 'app-waste-place',
   templateUrl: './waste-place.component.html',
@@ -39,14 +40,8 @@ export class WastePlaceComponent implements OnInit {
   constructor(
     private wsPlaceService: WastePlaceService,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private sharedService: SharedService
+    private dialog: MatDialog
   ) {
-    this.sharedService.currentSource.subscribe(() => {
-      setTimeout(() => {
-        this.angularGrid.resizerService.resizeGrid();
-      }, 100);
-    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });
@@ -55,6 +50,7 @@ export class WastePlaceComponent implements OnInit {
   ngOnInit(): void {
     this.refreshList(this.objectId);
     this.defineGrid();
+    // this.openWastePlaceDialog();
   }
 
   refreshList(id: number) {
@@ -68,6 +64,10 @@ export class WastePlaceComponent implements OnInit {
   openWastePlaceDialog() {
     this.wastePlaceFormRef = this.dialog.open(WastePlaceFormComponent, {
       width: '60%',
+      hasBackdrop: false,
+      position: {
+        top: '50px',
+      },
     });
     this.onAddWastePlace();
     this.onUpdateWastePlace();
@@ -104,6 +104,12 @@ export class WastePlaceComponent implements OnInit {
     });
   }
 
+  openMap(data: any) {
+    this.dialog.open(ObjectMapComponent, {
+      data: { data },
+    });
+  }
+
   defineGrid() {
     this.columnDefinitions = [
       {
@@ -113,7 +119,23 @@ export class WastePlaceComponent implements OnInit {
         filterable: true,
         sortable: true,
       },
-
+      {
+        id: 'map',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-map pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const id = args.dataContext.id;
+          this.wsPlaceService.getWastePlace(id).subscribe((data: any) => {
+            const coords = JSON.parse(data.coords);
+            this.openMap(coords);
+          });
+        },
+      },
       {
         id: 'view',
         field: 'id',
