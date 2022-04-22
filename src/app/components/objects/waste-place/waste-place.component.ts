@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { WastePlaceModel } from '@models/objects/waste-place/waste-place.model';
 import { WastePlaceService } from '@services/objects/waste-place/waste-place.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { WastePlaceFormComponent } from './waste-place-form/waste-place-form.component';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
@@ -29,8 +29,8 @@ export class WastePlaceComponent implements OnInit {
   dataViewObj: any;
   objectId!: number;
   wastePlaceId!: number;
-  wastePlaceFormRef: any;
-
+  wastePlaceFormRef!: MatDialogRef<WastePlaceFormComponent>;
+  isEdit = false;
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
@@ -50,7 +50,6 @@ export class WastePlaceComponent implements OnInit {
   ngOnInit(): void {
     this.refreshList(this.objectId);
     this.defineGrid();
-    // this.openWastePlaceDialog();
   }
 
   refreshList(id: number) {
@@ -69,36 +68,27 @@ export class WastePlaceComponent implements OnInit {
         top: '50px',
       },
     });
-    this.onAddWastePlace();
-    this.onUpdateWastePlace();
-  }
 
-  onAddWastePlace() {
-    this.wastePlaceFormRef.componentInstance.addWastePlace.subscribe({
-      next: (value: WastePlaceModel) => {
-        const data = {
-          ...value,
-          pekObjectId: this.objectId,
-        };
-        this.wsPlaceService.addWastePlace(data).subscribe(() => {
-          this.wastePlaceFormRef.close();
-          this.refreshList(this.objectId);
-        });
-      },
+    this.onAddOrUpdatePlace();
+    this.wastePlaceFormRef.afterClosed().subscribe(() => {
+      this.isEdit = false;
     });
   }
 
-  onUpdateWastePlace() {
-    this.wastePlaceFormRef.componentInstance.updateWastePlace.subscribe({
+  onAddOrUpdatePlace() {
+    this.wastePlaceFormRef.componentInstance.addOrUpdatePlace.subscribe({
       next: (value: WastePlaceModel) => {
         const data = {
-          id: this.wastePlaceId,
+          id: this.isEdit ? this.wastePlaceId : 0,
           ...value,
           pekObjectId: this.objectId,
         };
-        this.wsPlaceService.updateWastePlace(data).subscribe(() => {
-          this.wastePlaceFormRef.close();
-          this.refreshList(this.objectId);
+
+        this.wsPlaceService.addOrUpdateWastePlace(data).subscribe({
+          next: () => {
+            this.wastePlaceFormRef.close();
+            this.refreshList(this.objectId);
+          },
         });
       },
     });
@@ -106,8 +96,13 @@ export class WastePlaceComponent implements OnInit {
 
   openMap(data: any) {
     this.dialog.open(ObjectMapComponent, {
-      data: { data },
+      data,
     });
+  }
+
+  onCellClicked(e: any, args: any) {
+    const item = this.gridObj.getDataItem(args.row);
+    this.wastePlaceId = item.id;
   }
 
   defineGrid() {
@@ -129,11 +124,9 @@ export class WastePlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          const id = args.dataContext.id;
-          this.wsPlaceService.getWastePlace(id).subscribe((data: any) => {
-            const coords = JSON.parse(data.coords);
-            this.openMap(coords);
-          });
+          const data = args.dataContext;
+          const coords = JSON.parse(data.coords);
+          this.openMap(coords);
         },
       },
       {
@@ -146,11 +139,11 @@ export class WastePlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          this.wastePlaceId = args.dataContext.id;
+          const data = args.dataContext;
           this.openWastePlaceDialog();
+          this.wastePlaceFormRef.componentInstance.editForm(data);
           this.wastePlaceFormRef.componentInstance.form.disable();
           this.wastePlaceFormRef.componentInstance.viewMode = true;
-          this.wastePlaceFormRef.componentInstance.editForm(this.wastePlaceId);
         },
       },
       {
@@ -163,9 +156,10 @@ export class WastePlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          this.wastePlaceId = args.dataContext.id;
+          const data = args.dataContext;
+          this.isEdit = true;
           this.openWastePlaceDialog();
-          this.wastePlaceFormRef.componentInstance.editForm(this.wastePlaceId);
+          this.wastePlaceFormRef.componentInstance.editForm(data);
         },
       },
       {
@@ -178,7 +172,6 @@ export class WastePlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          const id = args.dataContext.id;
           const dialogData = new ConfirmDialogModel(
             'Подтвердить действие',
             'Вы уверены, что хотите удалить это?'
@@ -191,9 +184,11 @@ export class WastePlaceComponent implements OnInit {
 
           dialogRef.afterClosed().subscribe((dialogResult: any) => {
             if (dialogResult) {
-              this.wsPlaceService.deleteWastePlace(id).subscribe(() => {
-                this.refreshList(this.objectId);
-              });
+              this.wsPlaceService
+                .deleteWastePlace(this.wastePlaceId)
+                .subscribe(() => {
+                  this.refreshList(this.objectId);
+                });
             }
           });
         },

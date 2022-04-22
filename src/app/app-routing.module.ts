@@ -8,6 +8,7 @@ import { ObjectsComponent } from './components/objects/objects.component';
 import { CalculationMethodComponent } from './components/objects/source-emissions/calculation-method/calculation-method.component';
 import { InstrumentalMeasurementComponent } from './components/objects/source-emissions/instrumental-measurement/instrumental-measurement.component';
 import { SourceEmissionsComponent } from './components/objects/source-emissions/source-emissions.component';
+import { WastePlaceFormComponent } from './components/objects/waste-place/waste-place-form/waste-place-form.component';
 import { WastePlaceComponent } from './components/objects/waste-place/waste-place.component';
 import { WasteWaterComponent } from './components/objects/waste-water/waste-water.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
@@ -68,6 +69,7 @@ const routes: Routes = [
             path: 'waste-place',
             component: WastePlaceComponent,
           },
+          { path: 'waste-place-form', component: WastePlaceFormComponent },
           {
             path: 'burial-place',
             component: BurialPlaceComponent,

@@ -18,46 +18,17 @@
 </div>
 <hr />
 
-<!-- <mat-sidenav-container>
-  <mat-sidenav opened mode="side" [fixedInViewport]="false" class="report-menu">
-    <mat-nav-list>
-      <a
-        mat-list-item
-        *ngFor="let rep of reportRoute"
-        [routerLink]="rep.src"
-        [routerLinkActive]="['is-active']"
-      >
-        {{ rep.name }}</a
-      >
-    </mat-nav-list>
-  </mat-sidenav>
 
-  <mat-sidenav-content class="report-content">
-    <div class="container">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
 
 <mat-sidenav-container>
-  <mat-sidenav
-    #sidenav
-    mode="side"
-    opened="true"
-    (mouseenter)="increase()"
-    (mouseleave)="decrease()"
-    class="report-menu"
-  >
+  <mat-sidenav #sidenav mode="side" opened="true" (mouseenter)="increase()" (mouseleave)="decrease()"
+    class="report-menu">
     <mat-nav-list>
       <mat-list-item>
         <mat-icon>format_list_bulleted </mat-icon>
       </mat-list-item>
 
-      <mat-list-item
-        *ngFor="let rep of reportRoute"
-        [routerLink]="rep.src"
-        [routerLinkActive]="['is-active']"
-      >
+      <mat-list-item *ngFor="let rep of reportRoute" [routerLink]="rep.src" [routerLinkActive]="['is-active']">
         <mat-icon> bookmark_border </mat-icon>
 
         <div fxFlex="5"></div>
@@ -68,7 +39,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content class="report-content">
+  <mat-sidenav-content>
     <div class="container">
       <router-outlet></router-outlet>
     </div>

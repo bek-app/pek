@@ -1,9 +1,23 @@
 mat-table {
   width: auto;
-
   margin-bottom: 15px;
   box-shadow: 0 0 10px rgb(26, 18, 18, 0.5);
+  mat-header-row mat-header-cell.mat-column-edit,
+  .mat-column-delete,
+  .mat-column-deleteBtn,
+  .mat-column-action {
+    flex: 0 0 5% !important;
+  }
+  mat-row mat-cell.mat-column-edit,
+  .mat-column-delete,
+  .mat-column-deleteBtn,
+  .mat-column-action {
+    flex: 0 0 5% !important;
+  }
 }
 .btn-add {
   margin-bottom: 15px;
+}
+.coords__inputs {
+  margin-top: 15px;
 }

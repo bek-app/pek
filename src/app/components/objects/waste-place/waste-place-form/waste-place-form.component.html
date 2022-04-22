@@ -48,6 +48,7 @@
         <mat-cell *matCellDef="let row">{{ row.area }}</mat-cell>
       </ng-container>
 
+      <!-- delete -->
       <ng-container matColumnDef="deleteBtn">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let row; let i = index">
@@ -55,7 +56,7 @@
             mat-icon-button
             color="warn"
             type="button"
-            (click)="deleteArea(i, areaList); table.renderRows()"
+            (click)="deleteArea(i, areaList)"
           >
             <mat-icon>delete</mat-icon>
           </button>
@@ -92,19 +93,20 @@
           fxLayout="column"
           fxLayoutAlign="space-between space-between"
         >
-          <!--  -->
+          <!-- add coords input -->
           <div
+            class="coords__inputs"
             fxLayout="row"
             fxLayoutGap="10px"
             fxLayoutAlign="space-between center"
           >
             <mat-form-field>
-              <mat-label>lat</mat-label>
+              <mat-label>X</mat-label>
               <input matInput type="number" formControlName="lat" />
             </mat-form-field>
 
             <mat-form-field>
-              <mat-label>lng</mat-label>
+              <mat-label>Y</mat-label>
               <input matInput type="number" formControlName="lng" />
             </mat-form-field>
 
@@ -113,28 +115,46 @@
               color="primary"
               type="button"
               class="btn-add"
-              (click)="addCoords(detail); coordsTable.renderRows()"
+              (click)="addCoord(detail); coordsTable.renderRows()"
             >
-              <mat-icon>add</mat-icon>
+              <mat-icon> {{ isEditCoord ? "save" : "add" }} </mat-icon>
             </button>
           </div>
 
           <mat-table [dataSource]="detail.coords" #coordsTable>
             <!-- lat -->
             <ng-container matColumnDef="lat">
-              <mat-header-cell *matHeaderCellDef> lat </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> X </mat-header-cell>
               <mat-cell *matCellDef="let row"> {{ row[0] }} </mat-cell>
             </ng-container>
 
             <!-- lng -->
             <ng-container matColumnDef="lng">
-              <mat-header-cell *matHeaderCellDef> lng </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Y </mat-header-cell>
               <mat-cell *matCellDef="let row"> {{ row[1] }} </mat-cell>
+            </ng-container>
+
+            <!-- edit -->
+            <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+              <mat-cell *matCellDef="let row; let i = index">
+                <button
+                  matRipple
+                  mat-icon-button
+                  color="accent"
+                  type="button"
+                  (click)="
+                    editCoord(i, detail.coords); coordsTable.renderRows()
+                  "
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </mat-cell>
             </ng-container>
 
             <!-- deletBtn -->
 
-            <ng-container matColumnDef="deleteBtn">
+            <ng-container matColumnDef="delete">
               <mat-header-cell *matHeaderCellDef> </mat-header-cell>
               <mat-cell *matCellDef="let row; let i = index">
                 <button
@@ -151,11 +171,11 @@
             </ng-container>
 
             <mat-header-row
-              *matHeaderRowDef="['lat', 'lng', 'deleteBtn']"
+              *matHeaderRowDef="['lat', 'lng', 'edit', 'delete']"
             ></mat-header-row>
             <mat-row
               matRipple
-              *matRowDef="let row; columns: ['lat', 'lng', 'deleteBtn']"
+              *matRowDef="let row; columns: ['lat', 'lng', 'edit', 'delete']"
             ></mat-row>
           </mat-table>
         </mat-cell>

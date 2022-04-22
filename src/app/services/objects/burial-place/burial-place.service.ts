@@ -30,7 +30,7 @@ export class BurialPlaceService {
     );
   }
 
-  addBurialPlace(data: BurialPlaceModel): Observable<BurialPlaceModel> {
+  addOrUpdateBurialPlace(data: BurialPlaceModel): Observable<BurialPlaceModel> {
     return this.http.put<BurialPlaceModel>(
       'api/BurialPlaceStorage',
       JSON.stringify(data),
@@ -38,13 +38,7 @@ export class BurialPlaceService {
     );
   }
 
-  updateBurialPlace(data: BurialPlaceModel): Observable<BurialPlaceModel> {
-    return this.http.put<BurialPlaceModel>(
-      'api/BurialPlaceStorage',
-      JSON.stringify(data),
-      this.httpOptions
-    );
-  }
+
 
   deleteBurialPlace(id: number): Observable<BurialPlaceModel> {
     return this.http.delete<BurialPlaceModel>(

@@ -29,25 +29,30 @@ export class ObjectMapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    // this.makeMarkers(this.map, this.data);
+     this.makeMarkers(this.map, this.data);
     this.makePolygons(this.map, this.data);
   }
 
   makeMarkers(map: L.Map, coords: any): void {
+    console.log(coords);
+
     coords.forEach((coord: any) => {
       const { lat, lng } = coord;
-      const marker = L.marker([lat, lng]);
-      marker.addTo(map);
+      if (lat && lng) {
+        const marker = L.marker([lat, lng]);
+        marker.addTo(map);
+      }
     });
   }
 
-  makePolygons(map: L.Map, payload: any): void {
-    const { data } = payload;
-
-    data.forEach((items: any) => {
-      const polygon = new L.Polygon(items.coords);
-      polygon.addTo(map);
-    });
+  makePolygons(map: L.Map, coords: any): void {
+    console.log(coords);
+    if (Array.isArray(coords)) {
+      coords.forEach((item: any) => {
+        const polygon = new L.Polygon(item.coords);
+        polygon.addTo(map);
+      });
+    }
   }
   private initMap(): void {
     this.map = L.map('map', {

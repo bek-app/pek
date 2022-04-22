@@ -9,11 +9,13 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { BurialPlaceFormComponent } from './burial-place-form/burial-place-form.component';
 import { BurialPlaceModel } from '@models/objects/burial-place/burial-place.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BurialPlaceService } from '@services/objects/burial-place/burial-place.service';
 import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { SharedService } from '@services/shared.service';
+import { ObjectMapComponent } from '../object-map/object-map.component';
+import { WastePlaceFormComponent } from '../waste-place/waste-place-form/waste-place-form.component';
 @Component({
   selector: 'app-burial-place',
   templateUrl: './burial-place.component.html',
@@ -28,7 +30,8 @@ export class BurialPlaceComponent implements OnInit {
   dataViewObj: any;
   burialPlaceId!: number;
   objectId!: number;
-  burialPlaceFormRef: any;
+  burialPlaceFormRef!: MatDialogRef<WastePlaceFormComponent>;
+  isEdit = false;
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
@@ -38,14 +41,8 @@ export class BurialPlaceComponent implements OnInit {
   constructor(
     private burialPlaceService: BurialPlaceService,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private sharedService: SharedService
+    private dialog: MatDialog
   ) {
-    this.sharedService.currentSource.subscribe(() => {
-      setTimeout(() => {
-        this.angularGrid.resizerService.resizeGrid();
-      }, 100);
-    });
     this.route.params.subscribe((param: Params) => {
       this.objectId = +param['id'];
     });
@@ -59,45 +56,49 @@ export class BurialPlaceComponent implements OnInit {
   refreshList(id: number) {
     this.burialPlaceService
       .getBurialPlaceList(id)
-      .subscribe((data: BurialPlaceModel[]) => {
-        this.dataset = data;
-      });
-  }
-  openBurialPlaceDialog() {
-    this.burialPlaceFormRef = this.dialog.open(BurialPlaceFormComponent, {
-      width: '60%',
-    });
-    this.onAddBurialPlace();
-    this.onUpdateBurialPlace();
+      .subscribe((data: BurialPlaceModel[]) => (this.dataset = data));
   }
 
-  onAddBurialPlace() {
-    this.burialPlaceFormRef.componentInstance.addBurialPlace.subscribe({
-      next: (value: BurialPlaceModel) => {
-        this.burialPlaceService
-          .addBurialPlace({ ...value, pekObjectId: this.objectId })
-          .subscribe(() => {
-            this.burialPlaceFormRef.close();
-            this.refreshList(this.objectId);
-          });
+  openBurialPlaceDialog() {
+    this.burialPlaceFormRef = this.dialog.open(WastePlaceFormComponent, {
+      width: '60%',
+      hasBackdrop: false,
+      position: {
+        top: '50px',
       },
     });
+
+    this.addOrUpdatePlace();
+    this.burialPlaceFormRef.afterClosed().subscribe(() => {
+      this.isEdit = false;
+    });
   }
 
-  onUpdateBurialPlace() {
-    this.burialPlaceFormRef.componentInstance.updateBurialPlace.subscribe({
+  addOrUpdatePlace() {
+    this.burialPlaceFormRef.componentInstance.addOrUpdatePlace.subscribe({
       next: (value: BurialPlaceModel) => {
         const data = {
-          id: this.burialPlaceId,
+          id: this.isEdit ? this.burialPlaceId : 0,
           ...value,
           pekObjectId: this.objectId,
         };
-        this.burialPlaceService.updateBurialPlace(data).subscribe(() => {
+        this.burialPlaceService.addOrUpdateBurialPlace(data).subscribe(() => {
           this.burialPlaceFormRef.close();
           this.refreshList(this.objectId);
         });
       },
     });
+  }
+
+  openMap(data: any) {
+    this.dialog.open(ObjectMapComponent, {
+      data,
+    });
+  }
+
+  onCellClicked(e: any, args: any) {
+    const item = this.gridObj.getDataItem(args.row);
+    this.burialPlaceId = item.id;
   }
 
   defineGrid() {
@@ -109,7 +110,21 @@ export class BurialPlaceComponent implements OnInit {
         filterable: true,
         sortable: true,
       },
-
+      {
+        id: 'map',
+        field: 'id',
+        excludeFromColumnPicker: true,
+        excludeFromGridMenu: true,
+        excludeFromHeaderMenu: true,
+        formatter: () => `<i class="fa fa-map pointer"></i>`,
+        minWidth: 30,
+        maxWidth: 30,
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          const data = args.dataContext;
+          const coords = JSON.parse(data.coords);
+          this.openMap(coords);
+        },
+      },
       {
         id: 'view',
         field: 'id',
@@ -120,12 +135,11 @@ export class BurialPlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          this.burialPlaceId = args.dataContext.id;
+          const data = args.dataContext;
           this.openBurialPlaceDialog();
           this.burialPlaceFormRef.componentInstance.form.disable();
-          this.burialPlaceFormRef.componentInstance.editForm(
-            this.burialPlaceId
-          );
+          this.burialPlaceFormRef.componentInstance.editForm(data);
+          this.burialPlaceFormRef.componentInstance.viewMode = true;
         },
       },
       {
@@ -138,11 +152,10 @@ export class BurialPlaceComponent implements OnInit {
         minWidth: 30,
         maxWidth: 30,
         onCellClick: (e: Event, args: OnEventArgs) => {
-          this.burialPlaceId = args.dataContext.id;
+          const data = args.dataContext;
+          this.isEdit = true;
           this.openBurialPlaceDialog();
-          this.burialPlaceFormRef.componentInstance.editForm(
-            this.burialPlaceId
-          );
+          this.burialPlaceFormRef.componentInstance.editForm(data);
         },
       },
       {

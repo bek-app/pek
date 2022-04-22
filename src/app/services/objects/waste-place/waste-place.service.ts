@@ -30,15 +30,7 @@ export class WastePlaceService {
     );
   }
 
-  addWastePlace(data: WastePlaceModel): Observable<WastePlaceModel> {
-    return this.http.put<WastePlaceModel>(
-      'api/WastePlaceStorage',
-      JSON.stringify(data),
-      this.httpOptions
-    );
-  }
-
-  updateWastePlace(data: WastePlaceModel): Observable<WastePlaceModel> {
+  addOrUpdateWastePlace(data: WastePlaceModel): Observable<WastePlaceModel> {
     return this.http.put<WastePlaceModel>(
       'api/WastePlaceStorage',
       JSON.stringify(data),

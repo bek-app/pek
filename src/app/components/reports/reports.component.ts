@@ -80,7 +80,7 @@ export class ReportsComponent implements OnInit {
   send() {
     if (confirm('Are you sure to  change ? ')) {
       this.reportService.changeStatusReport(this.reportId).subscribe(() => {
-        this.router.navigate(['/report-list']);
+        this.router.navigate(['common/report-list']);
       });
     }
   }

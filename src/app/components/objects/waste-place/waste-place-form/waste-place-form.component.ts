@@ -8,24 +8,22 @@ import {
 import {
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { ConfirmDialogModel } from '@models/confirm-dialog.model';
 import { WastePlaceModel } from '@models/objects/waste-place/waste-place.model';
-import { WastePlaceService } from '@services/objects/waste-place/waste-place.service';
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-waste-place-form',
@@ -44,30 +42,25 @@ import { WastePlaceService } from '@services/objects/waste-place/waste-place.ser
 })
 export class WastePlaceFormComponent implements OnInit {
   form: FormGroup;
-
   submitted = false;
   viewMode!: boolean;
-  areaList: any[] = [];
-  selectedAreaId: any;
-  editAreaMode?: boolean;
-  editAreaId?: number;
-  editCoordMode?: boolean;
-  editCoordId?: number;
-  isActive = false;
+  areaList: any[] = [
+    {
+      area: 'Участок 1',
+      coords: [[51, 71]],
+    },
+  ];
+  coordIdx!: number;
+  isEditCoord!: boolean;
   @Output()
-  addWastePlace = new EventEmitter<WastePlaceModel>();
-  @Output()
-  updateWastePlace = new EventEmitter<WastePlaceModel>();
+  addOrUpdatePlace = new EventEmitter<WastePlaceModel>();
 
   expandedElement: any | null;
   @ViewChild('table', { static: true, read: MatTable }) table: any;
 
-  displayedColumns = ['areaId', 'area', 'deleteBtn', 'action'];
+  displayedColumns = ['area', 'deleteBtn', 'action'];
 
-  constructor(
-    public fb: FormBuilder,
-    private wastePlaceService: WastePlaceService
-  ) {
+  constructor(public fb: FormBuilder, private dialog: MatDialog) {
     this.form = this.fb.group({
       nameObject: new FormControl('', [Validators.required]),
       area: new FormControl(),
@@ -76,45 +69,73 @@ export class WastePlaceFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
-  get f(): { [key: string]: AbstractControl } {
-    return this.form.controls;
+  ngOnInit(): void {
+    console.log(this.areaList);
   }
 
   addArea(): void {
     if (!this.form.controls['area'].value) {
       return;
     }
+    
     this.areaList.push({
-      areaId: this.areaList.length,
       area: this.form.controls['area'].value,
       coords: [],
     });
+
     this.form.controls['area'].reset();
     this.table.renderRows();
   }
 
   deleteArea(i: number, areaList: any): void {
-    areaList.splice(i, 1);
+    const dialogData = new ConfirmDialogModel(
+      'Подтвердить действие',
+      'Вы уверены, что хотите удалить это?'
+    );
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult: any) => {
+      if (dialogResult) {
+        areaList.splice(i, 1);
+        this.table.renderRows();
+      }
+    });
   }
 
-  addCoords(detail: any): void {
+  addCoord(detail: any): void {
     if (!this.form.controls['lat'].value && !this.form.controls['lng'].value) {
       return;
     }
 
-    detail.coords.push([
-      this.form.controls['lat'].value,
-      this.form.controls['lng'].value,
-    ]);
+    const { coords } = detail;
+    if (!this.isEditCoord) {
+      coords.push([
+        this.form.controls['lat'].value,
+        this.form.controls['lng'].value,
+      ]);
+    } else {
+      coords[this.coordIdx][0] = this.form.controls['lat'].value;
+      coords[this.coordIdx][1] = this.form.controls['lng'].value;
+      this.isEditCoord = false;
+    }
 
     this.form.controls['lat'].reset();
     this.form.controls['lng'].reset();
   }
 
-  deleteCoord(i: number, coords: [lat: number, lng: number]): void {
+  deleteCoord(i: number, coords: any): void {
     coords.splice(i, 1);
+  }
+
+  editCoord(i: number, coords: any) {
+    this.isEditCoord = true;
+    this.coordIdx = i;
+    this.form.controls['lat'].setValue(coords[i][0]);
+    this.form.controls['lng'].setValue(coords[i][1]);
   }
 
   onSubmit() {
@@ -127,20 +148,17 @@ export class WastePlaceFormComponent implements OnInit {
       nameObject: this.form.value.nameObject,
       coords: JSON.stringify(this.areaList),
     };
-    console.log(data);
 
-    !this.isActive
-      ? this.addWastePlace.emit(data)
-      : this.updateWastePlace.emit(data);
+    this.addOrUpdatePlace.emit(data);
   }
 
-  editForm(id: number) {
-    this.isActive = true;
-    this.wastePlaceService.getWastePlace(id).subscribe((res: any) => {
-      const areas = JSON.parse(res.coords);
-      this.areaList = areas;
-      this.form.controls['nameObject'].setValue(res.nameObject);
-      this.table.renderRows();
-    });
+  editForm(data: WastePlaceModel) {
+    const areas = JSON.parse(data.coords as string);
+    this.areaList = areas;
+    this.form.controls['nameObject'].setValue(data.nameObject);
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
   }
 }
